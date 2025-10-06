@@ -5,20 +5,46 @@ export default function RegisterForm() {
     const [password, setPassword] = useState<string>('')
     const [retypedpassword, setretypedpassword] = useState<string>('')
 
-    function sendForm() {
-        alert(name)
+    async function sendForm(e) {
+        e.preventDefault();
+        if (password != retypedpassword) {
+            alert('hasla nie zgadzaja sie');
+            return;
+        }
+        const response = await fetch('https://questions.tojest.dev/api/user', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: name,
+                password: password
+            })
+        });
+        const data = await response.json();
+        alert(JSON.stringify(data));
     }
 
     return (
-        <form onSubmit={() => sendForm()}>
+        <form onSubmit={sendForm}>
             <label for="name">name </label>
-            <input onChange={(e) => setName(e.target.value)} value={name} id="name"/>
+            <input value={name}
+                   id="name"
+                   onChange={(e) => setName(e.target.value)}
+            />
             <br/>
             <label htmlFor="password">password </label>
-            <input onChange={(e) => setPassword(e.target.value)} value={password} id="password"/>
+            <input id="password"
+                   type="password"
+                   value={password}
+                   onChange={(e) => setPassword(e.target.value)}
+            />
             <br/>
             <label htmlFor="retype-password">retyped password </label>
-            <input onChange={(e) => setretypedpassword(e.target.value)} value={retypedpassword} id="retype-password"/>
+            <input id="retype-password"
+                   value={retypedpassword}
+                   type="password"
+                   onChange={(e) => setretypedpassword(e.target.value)}/>
             <br/>
             <button type="submit">Rejestruj</button>
         </form>
