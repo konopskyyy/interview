@@ -2,11 +2,20 @@ import { useState } from "react";
 
 export default function RemindMeForm() {
     const [name, setName] = useState('');
-    const [password, setPassword] = useState('');
 
     async function sendForm(e) {
         e.preventDefault();
-        alert(name)
+        const response = await fetch('https://questions.tojest.dev/api/user/remind-me', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: name,
+            })
+        });
+        const data = await response.json();
+        alert(JSON.stringify(data));
     }
 
     return (
