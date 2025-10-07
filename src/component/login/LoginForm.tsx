@@ -1,10 +1,11 @@
 import { useState } from "react";
+import type { FormEvent } from "react";
 
 export default function LoginForm() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
-  async function sendForm(e) {
+  async function sendForm(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const response = await fetch(
       "https://questions.tojest.dev/api/login_check",

@@ -1,9 +1,10 @@
 import { useState } from "react";
+import type { FormEvent } from "react";
 
 export default function RemindMeForm() {
   const [name, setName] = useState("");
 
-  async function sendForm(e) {
+  async function sendForm(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const response = await fetch(
       "https://questions.tojest.dev/api/user/remind-me",
