@@ -1,11 +1,12 @@
 import { useState } from "react";
+import type { FormEvent } from "react";
 
 export default function RegisterForm() {
   const [name, setName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [retypedpassword, setretypedpassword] = useState<string>("");
 
-  async function sendForm(e) {
+  async function sendForm(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (password != retypedpassword) {
       alert("hasla nie zgadzaja sie");
@@ -27,7 +28,7 @@ export default function RegisterForm() {
 
   return (
     <form onSubmit={sendForm}>
-      <label for="name">name </label>
+      <label htmlFor="name">name </label>
       <input value={name} id="name" onChange={(e) => setName(e.target.value)} />
       <br />
       <label htmlFor="password">password </label>
