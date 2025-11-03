@@ -20,8 +20,9 @@ export default function LoginForm() {
         }),
       },
     );
+
     const data = await response.json();
-    alert(JSON.stringify(data));
+    localStorage.setItem('user_token', data.token);
   }
 
   return (
