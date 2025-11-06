@@ -15,6 +15,7 @@ export function UserContextProvider(props)
 
     function logout(): void
     {
+        console.log("Wywołano logout");
         localStorage.removeItem('user_token');
     }
 
@@ -35,7 +36,7 @@ export function UserContextProvider(props)
     }
 
     return (
-        <UserContext.Provider value={{ user, isLogged, getUsername }}>
+        <UserContext.Provider value={{ user, isLogged, getUsername, logout }}>
             {props.children}
         </UserContext.Provider>
     );
