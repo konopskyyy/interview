@@ -10,7 +10,6 @@ export function UserContextProvider(props)
     function isLogged(): boolean
     {
         const token = localStorage.getItem('user_token');
-        console.log(token)
         return token ? true: false;
     }
 
