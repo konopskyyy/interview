@@ -9,12 +9,12 @@ function App() {
     return (
         <>
             <BrowserRouter>
-            <UserContextProvider>
-                <Header/>
-            </UserContextProvider>
-            <Page/>
-            <Footer/>
-        </BrowserRouter>
+                <UserContextProvider>
+                    <Header/>
+                    <Page/>
+                    <Footer/>
+                </UserContextProvider>
+            </BrowserRouter>
         </>
     );
 }
