@@ -46,7 +46,7 @@ export default function LoginForm() {
                 value={name}
                 id="name"
             />
-            <br />
+            <br/>
             <label htmlFor="password">password </label>
             <input
                 onChange={(e) => setPassword(e.target.value)}
@@ -54,12 +54,12 @@ export default function LoginForm() {
                 id="password"
                 type="password"
             />
-            <br />
+            <br/>
             <button type="submit" disabled={mutation.isLoading}>
                 {mutation.isLoading ? "Logowanie..." : "Zaloguj"}
             </button>
             {mutation.isError && (
-                <p style={{ color: "red" }}>Błąd: {(mutation.error as Error).message}</p>
+                <p style={{color: "red"}}>Błąd: {(mutation.error as Error).message}</p>
             )}
             <h5>
                 nie pamiętasz hasła? <a href="remind-me">przypomij</a>
