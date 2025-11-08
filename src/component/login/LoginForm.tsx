@@ -34,7 +34,7 @@ export default function LoginForm() {
             {
                 onSuccess(data) {
                     login(data.token);
-                    navigate("/");
+                    navigate("/account");
                 },
                 onError(error) {
                     alert((error as Error).message);
