@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import type { FormEvent } from "react";
 import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router";
+import { UserContext } from "../../context/UserContext.tsx";
 
 export default function LoginForm() {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+    const { login } = useContext(UserContext);
 
     const mutation = useMutation({
         mutationFn: (user: { username: string; password: string }) =>
@@ -29,7 +33,8 @@ export default function LoginForm() {
             { username: name, password: password },
             {
                 onSuccess(data) {
-                    localStorage.setItem("user_token", data.token);
+                    login(data.token);
+                    navigate("/");
                 },
                 onError(error) {
                     alert((error as Error).message);

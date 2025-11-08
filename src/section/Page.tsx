@@ -10,7 +10,7 @@ export default function Page()
     return (
         <div className="pt-14">
             <Routes>
-                <Route path="/" element={<RegisterForm />} />
+                <Route path="/" element={<NotFound />} />
                 <Route path="/login" element={<LoginForm />} />
                 <Route path="/register" element={<RegisterForm />} />
                 <Route path="/remind-me" element={<RemindMeForm />} />

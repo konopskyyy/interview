@@ -17,7 +17,7 @@ export default function LoggedUserHeader(props)
                         <li><NavLink to="/" className="hover:text-white">Strona główna </NavLink> </li>
                         <li><NavLink to="/" className="hover:text-white">Aplikacja</NavLink></li>
                         <li><NavLink to="/account" className="hover:text-white">{username}</NavLink></li>
-                        <li onClick={logout} className="hover:text-white">Wyloguj</li>
+                        <li onClick={logout} className="hover:text-white cursor-pointer">Wyloguj</li>
                     </ul>
                 </div>
             </nav>
