@@ -6,14 +6,14 @@ import {UserContextProvider} from "./context/UserContext.tsx";
 
 function App() {
   return (
-    <>
-        <UserContextProvider>
-        <Header />
-        </UserContextProvider>
-        <Page />
-        <Footer />
+      <>
+          <UserContextProvider>
+              <Header/>
+          </UserContextProvider>
+          <Page/>
+          <Footer/>
 
-    </>
+      </>
   );
 }
 
