@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import RegisterForm from "../component/register/RegisterForm.tsx";
 import LoginForm from "../component/login/LoginForm.tsx";
 import RemindMeForm from "../component/remind-me/RemindMeForm.tsx";
@@ -8,7 +8,7 @@ import NotFound from "./NotFound.tsx";
 export default function Page()
 {
     return (
-        <BrowserRouter>
+        <div className="pt-14">
             <Routes>
                 <Route path="/" element={<RegisterForm />} />
                 <Route path="/login" element={<LoginForm />} />
@@ -16,6 +16,6 @@ export default function Page()
                 <Route path="/remind-me" element={<RemindMeForm />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
-        </BrowserRouter>
+        </div>
     )
 }

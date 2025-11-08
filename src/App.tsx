@@ -3,18 +3,20 @@ import Header from "./section/Headers.tsx";
 import Page from "./section/Page.tsx";
 import Footer from "./section/Footer.tsx";
 import {UserContextProvider} from "./context/UserContext.tsx";
+import {BrowserRouter} from "react-router-dom";
 
 function App() {
-  return (
-      <>
-          <UserContextProvider>
-              <Header/>
-          </UserContextProvider>
-          <Page/>
-          <Footer/>
-
-      </>
-  );
+    return (
+        <>
+            <BrowserRouter>
+            <UserContextProvider>
+                <Header/>
+            </UserContextProvider>
+            <Page/>
+            <Footer/>
+        </BrowserRouter>
+        </>
+    );
 }
 
 export default App;
