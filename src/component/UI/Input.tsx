@@ -1,13 +1,16 @@
+import {useId} from "react";
+
 export default function Input(props: any) {
+    const id = useId()
     const {fieldName, type, disabled, name, setName} = props;
 
     return (
         <>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor={id} className="block text-sm font-medium text-gray-700 mb-1">
                 {fieldName}
             </label>
             <input
-                id="name"
+                id={id}
                 type={type ?? "input"}
                 disabled={disabled ?? false}
                 value={name}
