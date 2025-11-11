@@ -1,6 +1,12 @@
 import { useId } from "react";
 
-export default function Input(props: any) {
+export default function Input(props: {
+  fieldName;
+  type;
+  disabled;
+  name;
+  setName;
+}) {
   const id = useId();
   const { fieldName, type, disabled, name, setName } = props;
 

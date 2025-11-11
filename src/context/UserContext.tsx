@@ -1,3 +1,5 @@
+/* eslint-disable react-refresh/only-export-components */
+
 import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 
@@ -28,7 +30,7 @@ export function UserContextProvider(props) {
     return user?.username || "";
   }
 
-  function decode(token: string): any {
+  function decode(token: string): string {
     const payloadBase64 = token.split(".")[1];
     const base64 = payloadBase64.replace(/-/g, "+").replace(/_/g, "/");
     const jsonPayload = decodeURIComponent(
@@ -37,7 +39,7 @@ export function UserContextProvider(props) {
         .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
         .join(""),
     );
-    return JSON.parse(jsonPayload);
+    return JSON.parse(jsonPayload) as string;
   }
 
   function login(token: string) {
