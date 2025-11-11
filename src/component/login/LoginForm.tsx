@@ -3,6 +3,8 @@ import type { FormEvent } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { UserContext } from "../../context/UserContext.tsx";
+import Input from "../UI/Input.tsx";
+import SendFormButton from "../UI/SendFormButton";
 
 export default function LoginForm() {
     const [name, setName] = useState("");
@@ -45,24 +47,9 @@ export default function LoginForm() {
 
     return (
         <form onSubmit={sendForm}>
-            <label htmlFor="name">name </label>
-            <input
-                onChange={(e) => setName(e.target.value)}
-                value={name}
-                id="name"
-            />
-            <br/>
-            <label htmlFor="password">password </label>
-            <input
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                id="password"
-                type="password"
-            />
-            <br/>
-            <button type="submit" disabled={mutation.isLoading}>
-                {mutation.isLoading ? "Logowanie..." : "Zaloguj"}
-            </button>
+            <Input fieldName="name" name={name} setName={setName} />
+            <Input fieldName="password" type="password" name={password} setName={setPassword} />
+            <SendFormButton disabled={mutation.isLoading} text= {mutation.isLoading ? "Logowanie..." : "Zaloguj"}/>
             {mutation.isError && (
                 <p style={{color: "red"}}>Błąd: {(mutation.error as Error).message}</p>
             )}
