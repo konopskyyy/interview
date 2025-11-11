@@ -1,5 +1,7 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
+import Input from "../UI/Input";
+import SendFormButton from "../UI/SendFormButton";
 
 export default function RegisterForm() {
   const [name, setName] = useState<string>("");
@@ -28,26 +30,10 @@ export default function RegisterForm() {
 
   return (
     <form onSubmit={sendForm}>
-      <label htmlFor="name">name </label>
-      <input value={name} id="name" onChange={(e) => setName(e.target.value)} />
-      <br />
-      <label htmlFor="password">password </label>
-      <input
-        id="password"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <br />
-      <label htmlFor="retype-password">retyped password </label>
-      <input
-        id="retype-password"
-        value={retypedpassword}
-        type="password"
-        onChange={(e) => setretypedpassword(e.target.value)}
-      />
-      <br />
-      <button type="submit">Rejestruj</button>
+      <Input fieldName="name" name={name} setName={setName} />
+      <Input fieldName="password" type="password" name={password} setName={setPassword} />
+      <Input fieldName="retype-password" type="password" name={retypedpassword} setName={setretypedpassword} />
+      <SendFormButton text="Wyslij" />
     </form>
   );
 }
