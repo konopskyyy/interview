@@ -1,4 +1,4 @@
-export default function SendFormButton(props: any) {
+export default function SendFormButton(props: { text }) {
   const { text } = props;
   return (
     <button

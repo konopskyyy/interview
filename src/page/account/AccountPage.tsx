@@ -4,14 +4,13 @@ import { useNavigate } from "react-router";
 
 export default function AccountPage() {
   const { user } = useContext(UserContext);
-  const { isLogged } = useContext(UserContext);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLogged()) {
+    if (!user) {
       navigate("/");
     }
-  }, []);
+  }, [user, navigate]);
 
-  return <h2>Nazwa użytkownika: {user.username}</h2>;
+  return <h2>Nazwa użytkownika: {user?.username || "Niezalogowany"}</h2>;
 }
