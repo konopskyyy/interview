@@ -1,5 +1,3 @@
-import AccordionChild from "./AccordionChild.tsx";
-
 export default function AccordionParent(props)
 {
     return (
