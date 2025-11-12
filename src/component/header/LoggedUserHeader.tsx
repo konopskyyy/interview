@@ -17,7 +17,7 @@ export default function LoggedUserHeader(props) {
               </NavLink>{" "}
             </li>
             <li>
-              <NavLink to="/" className="hover:text-white">
+              <NavLink to="/interview-list" className="hover:text-white">
                 Aplikacja
               </NavLink>
             </li>

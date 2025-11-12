@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
-import Input from "../UI/Input";
-import SendFormButton from "../UI/SendFormButton";
+import Input from "../UI/form/Input.tsx";
+import SendFormButton from "../UI/form/SendFormButton.tsx";
 
 export default function RegisterForm() {
   const [name, setName] = useState<string>("");
