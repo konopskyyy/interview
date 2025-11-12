@@ -12,6 +12,5 @@ export default function AccountPage() {
     }
   }, [user, navigate]);
 
-  return (
-      <h2>Nazwa użytkownika: {user?.username || "Niezalogowany"}</h2>);
+  return <h2>Nazwa użytkownika: {user?.username || "Niezalogowany"}</h2>;
 }
