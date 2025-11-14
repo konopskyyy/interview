@@ -17,7 +17,7 @@ export default function InterviewList() {
       <AccordionParent title="Rekrutacje zakończone">
         <AccordionChild title="title child 1">
           <InterviewQuickInfo />
-          </AccordionChild>
+        </AccordionChild>
         <AccordionChild title="title child 2">
           <InterviewQuickInfo />
         </AccordionChild>
