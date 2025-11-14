@@ -8,13 +8,13 @@ export default function AddRecruiterModal(props)
 
     function handleAddRecruiter(e): void {
         setDisabledNone(true);
-        let newRecruiters = [...recruiters, e.target.value]
+        const newRecruiters = [...recruiters, e.target.value]
         setRecruiters(newRecruiters)
     }
 
     function handleRemoveRecruiter(key): void {
         setDisabledNone(true);
-        let newRecruiters = recruiters.filter((recruiter, index) => index != key)
+        const newRecruiters = recruiters.filter((recruiter, index) => index != key)
         setRecruiters(newRecruiters)
     }
 
