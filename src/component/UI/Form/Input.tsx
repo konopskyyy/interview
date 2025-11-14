@@ -8,7 +8,7 @@ export default function Input(props: {
   setName;
 }) {
   const id = useId();
-  const { fieldName, type, disabled, name, setName } = props;
+  const { fieldName, type, disabled = false, name, setName } = props;
 
   return (
     <>

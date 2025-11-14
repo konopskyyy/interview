@@ -3,8 +3,8 @@ import type { FormEvent } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { UserContext } from "../../context/UserContext.tsx";
-import Input from "../UI/form/Input.tsx";
-import SendFormButton from "../UI/form/SendFormButton.tsx";
+import Input from "../UI/Form/Input.tsx";
+import SendFormButton from "../UI/Form/SendFormButton.tsx";
 
 export default function LoginForm() {
   const [name, setName] = useState("");
