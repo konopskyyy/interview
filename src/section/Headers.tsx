@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext.tsx";
-import LoggedUserHeader from "../component/header/LoggedUserHeader.tsx";
-import AnonymousUserHeader from "../component/header/AnonymousUserHeader.tsx";
+import LoggedUserHeader from "../component/Header/LoggedUserHeader.tsx";
+import AnonymousUserHeader from "../component/Header/AnonymousUserHeader.tsx";
 
 export default function Header() {
   const context = useContext(UserContext);
