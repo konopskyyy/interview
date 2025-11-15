@@ -1,12 +1,22 @@
-export default function AccordionParent(props) {
+import type { ReactNode } from "react";
+
+interface AccordionParentProps {
+  title: string;
+  children: ReactNode;
+}
+
+export default function AccordionParent({
+  title,
+  children,
+}: AccordionParentProps) {
   return (
     <div className="space-y-2">
       <details
         className="group space-y-2 [&amp;_summary::-webkit-details-marker]:hidden"
-        open=""
+        open={false}
       >
         <summary className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-200 bg-white px-4 py-3 font-medium text-gray-900 hover:bg-gray-50 mt-2">
-          <span>{props.title}</span>
+          <span>{title}</span>
 
           <svg
             className="size-5 shrink-0 transition-transform duration-300 group-open:-rotate-180"
@@ -23,7 +33,7 @@ export default function AccordionParent(props) {
             ></path>
           </svg>
         </summary>
-        {props.children}
+        {children}
       </details>
     </div>
   );

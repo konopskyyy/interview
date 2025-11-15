@@ -8,9 +8,7 @@ export default function Header() {
 
   if (!context) return <h5>Brak kontekstu użytkownika</h5>;
 
-  const { isLogged } = context;
-  const { getUsername } = context;
-  const { logout } = context;
+  const { isLogged, getUsername, logout } = context;
 
   return isLogged() ? (
     <LoggedUserHeader username={getUsername()} logout={logout} />

@@ -3,7 +3,7 @@ import AddCandidateModal from "./AddCandidateModal.tsx";
 import { useState } from "react";
 
 export default function InterviewQuickInfo() {
-  const [recruiters, setRecruiters] = useState([]);
+  const [recruiters, setRecruiters] = useState<string[]>([]);
 
   return (
     <>

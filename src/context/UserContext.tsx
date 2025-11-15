@@ -1,12 +1,29 @@
 /* eslint-disable react-refresh/only-export-components */
 
 import { createContext, useState, useEffect } from "react";
+import type { ReactNode } from "react";
 import { useNavigate } from "react-router";
 
-export const UserContext = createContext(null);
+interface UserInterface {
+  username: string;
+}
 
-export function UserContextProvider(props) {
-  const [user, setUser] = useState(null);
+interface UserContextInterface {
+  user: UserInterface | null;
+  isLogged: () => boolean;
+  getUsername: () => string;
+  login: (token: string) => void;
+  logout: () => void;
+}
+
+interface UserContextProviderProps {
+  children: ReactNode;
+}
+
+export const UserContext = createContext<UserContextInterface | null>(null);
+
+export function UserContextProvider({ children }: UserContextProviderProps) {
+  const [user, setUser] = useState<UserInterface | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,7 +47,7 @@ export function UserContextProvider(props) {
     return user?.username || "";
   }
 
-  function decode(token: string): string {
+  function decode(token: string): UserInterface {
     const payloadBase64 = token.split(".")[1];
     const base64 = payloadBase64.replace(/-/g, "+").replace(/_/g, "/");
     const jsonPayload = decodeURIComponent(
@@ -39,7 +56,7 @@ export function UserContextProvider(props) {
         .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
         .join(""),
     );
-    return JSON.parse(jsonPayload) as string;
+    return JSON.parse(jsonPayload);
   }
 
   function login(token: string) {
@@ -51,7 +68,7 @@ export function UserContextProvider(props) {
     <UserContext.Provider
       value={{ user, isLogged, getUsername, login, logout }}
     >
-      {props.children}
+      {children}
     </UserContext.Provider>
   );
 }

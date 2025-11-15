@@ -1,19 +1,30 @@
 import BaseModal from "../UI/Modal/BaseModal.tsx";
 import { useState } from "react";
+import type { Dispatch, SetStateAction } from "react";
+import type { ChangeEvent } from "react";
 
-export default function AddRecruiterModal(props) {
-  const { recruiters, setRecruiters } = props;
+interface AddRecruiterModalProps {
+  recruiters: string[];
+  setRecruiters: Dispatch<SetStateAction<string[]>>;
+}
+
+export default function AddRecruiterModal({
+  recruiters,
+  setRecruiters,
+}: AddRecruiterModalProps) {
   const [disabledNone, setDisabledNone] = useState(false);
 
-  function handleAddRecruiter(e): void {
+  function handleAddRecruiter(e: ChangeEvent<HTMLSelectElement>): void {
     setDisabledNone(true);
     const newRecruiters = [...recruiters, e.target.value];
     setRecruiters(newRecruiters);
   }
 
-  function handleRemoveRecruiter(key): void {
+  function handleRemoveRecruiter(key: number): void {
     setDisabledNone(true);
-    const newRecruiters = recruiters.filter((recruiter, index) => index != key);
+    const newRecruiters = recruiters.filter(
+      (_: string, index: number) => index != key,
+    );
     setRecruiters(newRecruiters);
   }
 
@@ -21,7 +32,7 @@ export default function AddRecruiterModal(props) {
     <BaseModal title="Dodaj rekrutera">
       <h2 className="text-xl font-semibold mb-4">Dodaj Rekrutera</h2>
       <p>Rekruterzy:</p>
-      {recruiters.map((recruiter, key) => {
+      {recruiters.map((recruiter: string, key: number) => {
         return (
           <>
             <div>

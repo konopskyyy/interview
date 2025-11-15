@@ -1,14 +1,22 @@
+import type { Dispatch, SetStateAction } from "react";
 import { useId } from "react";
 
-export default function Input(props: {
-  fieldName;
-  type;
-  disabled;
-  name;
-  setName;
-}) {
+interface InputProps {
+  fieldName: string;
+  type?: string;
+  disabled?: boolean;
+  name: string;
+  setName: Dispatch<SetStateAction<string>>;
+}
+
+export default function Input({
+  fieldName,
+  type = "text",
+  disabled = false,
+  name,
+  setName,
+}: InputProps) {
   const id = useId();
-  const { fieldName, type, disabled = false, name, setName } = props;
 
   return (
     <>
@@ -20,8 +28,8 @@ export default function Input(props: {
       </label>
       <input
         id={id}
-        type={type ?? "input"}
-        disabled={disabled ?? false}
+        type={type}
+        disabled={disabled}
         value={name}
         onChange={(e) => setName(e.target.value)}
         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
