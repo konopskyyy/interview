@@ -11,10 +11,6 @@ export default function LoginForm() {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
     const context = useContext(UserContext);
-    if (!context) {
-        return null;
-    }
-    const { login } = context;
 
     const mutation = useMutation({
         mutationKey: ['login'],
@@ -34,6 +30,11 @@ export default function LoginForm() {
     const isLoading = mutation.status === "pending";
     const isError = mutation.status === "error";
     const error = mutation.error;
+
+    if (!context) {
+        return null;
+    }
+    const { login } = context;
 
     function sendForm(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();

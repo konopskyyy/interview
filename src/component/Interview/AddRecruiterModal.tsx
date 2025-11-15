@@ -2,8 +2,7 @@ import BaseModal from "../UI/Modal/BaseModal.tsx";
 import {useState} from "react";
 import type {ChangeEvent} from "react";
 
-export default function AddRecruiterModal(props: any) {
-  const { recruiters, setRecruiters } = props;
+export default function AddRecruiterModal({ recruiters, setRecruiters }: object) {
   const [disabledNone, setDisabledNone] = useState(false);
 
   function handleAddRecruiter(e: ChangeEvent<HTMLSelectElement>): void {
@@ -14,7 +13,7 @@ export default function AddRecruiterModal(props: any) {
 
   function handleRemoveRecruiter(key: number): void {
     setDisabledNone(true);
-    const newRecruiters = recruiters.filter((_: any, index: number) => index != key);
+    const newRecruiters = recruiters.filter((_: string, index: number) => index != key);
     setRecruiters(newRecruiters);
   }
 
@@ -22,7 +21,7 @@ export default function AddRecruiterModal(props: any) {
     <BaseModal title="Dodaj rekrutera">
       <h2 className="text-xl font-semibold mb-4">Dodaj Rekrutera</h2>
       <p>Rekruterzy:</p>
-      {recruiters.map((recruiter: any, key: number) => {
+      {recruiters.map((recruiter: string, key: number) => {
         return (
           <>
             <div>

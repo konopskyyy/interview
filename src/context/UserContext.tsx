@@ -8,7 +8,7 @@ interface UserInterface {
 }
 
 interface UserContextInterface {
-    user: any | null;
+    user: UserInterface | null;
     isLogged: () => boolean;
     getUsername: () => string;
     login: (token: string) => void;
@@ -17,7 +17,7 @@ interface UserContextInterface {
 
 export const UserContext = createContext<UserContextInterface | null>(null);
 
-export function UserContextProvider(props: any) {
+export function UserContextProvider({children}: object) {
   const [user, setUser] = useState<UserInterface | null>(null);
   const navigate = useNavigate();
 
@@ -63,7 +63,7 @@ export function UserContextProvider(props: any) {
     <UserContext.Provider
       value={{ user, isLogged, getUsername, login, logout }}
     >
-      {props.children}
+      {children}
     </UserContext.Provider>
   );
 }

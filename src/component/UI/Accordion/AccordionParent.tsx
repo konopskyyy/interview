@@ -1,4 +1,4 @@
-export default function AccordionParent(props: any) {
+export default function AccordionParent({title, children}: object) {
   return (
     <div className="space-y-2">
       <details
@@ -6,7 +6,7 @@ export default function AccordionParent(props: any) {
         open={false}
       >
         <summary className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-200 bg-white px-4 py-3 font-medium text-gray-900 hover:bg-gray-50 mt-2">
-          <span>{props.title}</span>
+          <span>{title}</span>
 
           <svg
             className="size-5 shrink-0 transition-transform duration-300 group-open:-rotate-180"
@@ -23,7 +23,7 @@ export default function AccordionParent(props: any) {
             ></path>
           </svg>
         </summary>
-        {props.children}
+        {children}
       </details>
     </div>
   );
