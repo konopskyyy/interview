@@ -1,11 +1,17 @@
 import BaseModal from "../UI/Modal/BaseModal.tsx";
-import { useState } from "react";
+import {useState} from "react";
+import type {Dispatch, SetStateAction} from "react";
 import type { ChangeEvent } from "react";
+
+interface AddRecruiterModalProps {
+    recruiters: string[];
+    setRecruiters: Dispatch<SetStateAction<string[]>>;
+}
 
 export default function AddRecruiterModal({
   recruiters,
   setRecruiters,
-}: object) {
+}: AddRecruiterModalProps) {
   const [disabledNone, setDisabledNone] = useState(false);
 
   function handleAddRecruiter(e: ChangeEvent<HTMLSelectElement>): void {

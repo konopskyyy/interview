@@ -1,6 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 
-import { createContext, useState, useEffect } from "react";
+import {createContext, useState, useEffect} from "react";
+import type {ReactNode} from "react"
 import { useNavigate } from "react-router";
 
 interface UserInterface {
@@ -15,9 +16,13 @@ interface UserContextInterface {
   logout: () => void;
 }
 
+interface UserContextProviderProps {
+    children: ReactNode;
+}
+
 export const UserContext = createContext<UserContextInterface | null>(null);
 
-export function UserContextProvider({ children }: object) {
+export function UserContextProvider({ children }: UserContextProviderProps) {
   const [user, setUser] = useState<UserInterface | null>(null);
   const navigate = useNavigate();
 
