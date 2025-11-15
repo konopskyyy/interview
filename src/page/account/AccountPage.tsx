@@ -1,16 +1,20 @@
 import { useContext, useEffect } from "react";
-import { UserContext } from "../../context/UserContext.tsx";
+import { UserContext } from "../../context/UserContext";
 import { useNavigate } from "react-router";
 
 export default function AccountPage() {
-  const { user } = useContext(UserContext);
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+    const context = useContext(UserContext);
 
-  useEffect(() => {
-    if (!user) {
-      navigate("/");
+    useEffect(() => {
+        if (!context || !context.user) {
+            navigate("/");
+        }
+    }, [context, navigate]);
+
+    if (!context || !context.user) {
+        return null;
     }
-  }, [user, navigate]);
 
-  return <h2>Nazwa użytkownika: {user?.username || "Niezalogowany"}</h2>;
+    return <h2>Nazwa użytkownika: {context.user.username}</h2>;
 }

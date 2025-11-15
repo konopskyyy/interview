@@ -1,5 +1,10 @@
-export default function SendFormButton(props: { text }) {
-  const { text } = props;
+interface SendFormButtonProps {
+    text: string;
+    disabled?: boolean;
+}
+
+export default function SendFormButton({text, disabled = false}: SendFormButtonProps) {
+
   return (
     <button
       type="submit"

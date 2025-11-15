@@ -1,4 +1,4 @@
-export default function AccordionChild(props) {
+export default function AccordionChild(props: any) {
   return (
     <div className="space-y-2 pl-4">
       <details
