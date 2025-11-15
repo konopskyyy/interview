@@ -1,10 +1,12 @@
 interface SendFormButtonProps {
-    text: string;
-    disabled?: boolean;
+  text: string;
+  disabled?: boolean;
 }
 
-export default function SendFormButton({text, disabled = false}: SendFormButtonProps) {
-
+export default function SendFormButton({
+  text,
+  disabled = false,
+}: SendFormButtonProps) {
   return (
     <button
       type="submit"

@@ -1,8 +1,11 @@
 import BaseModal from "../UI/Modal/BaseModal.tsx";
-import {useState} from "react";
-import type {ChangeEvent} from "react";
+import { useState } from "react";
+import type { ChangeEvent } from "react";
 
-export default function AddRecruiterModal({ recruiters, setRecruiters }: object) {
+export default function AddRecruiterModal({
+  recruiters,
+  setRecruiters,
+}: object) {
   const [disabledNone, setDisabledNone] = useState(false);
 
   function handleAddRecruiter(e: ChangeEvent<HTMLSelectElement>): void {
@@ -13,7 +16,9 @@ export default function AddRecruiterModal({ recruiters, setRecruiters }: object)
 
   function handleRemoveRecruiter(key: number): void {
     setDisabledNone(true);
-    const newRecruiters = recruiters.filter((_: string, index: number) => index != key);
+    const newRecruiters = recruiters.filter(
+      (_: string, index: number) => index != key,
+    );
     setRecruiters(newRecruiters);
   }
 

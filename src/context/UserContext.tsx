@@ -4,20 +4,20 @@ import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 
 interface UserInterface {
-    username: string;
+  username: string;
 }
 
 interface UserContextInterface {
-    user: UserInterface | null;
-    isLogged: () => boolean;
-    getUsername: () => string;
-    login: (token: string) => void;
-    logout: () => void;
+  user: UserInterface | null;
+  isLogged: () => boolean;
+  getUsername: () => string;
+  login: (token: string) => void;
+  logout: () => void;
 }
 
 export const UserContext = createContext<UserContextInterface | null>(null);
 
-export function UserContextProvider({children}: object) {
+export function UserContextProvider({ children }: object) {
   const [user, setUser] = useState<UserInterface | null>(null);
   const navigate = useNavigate();
 

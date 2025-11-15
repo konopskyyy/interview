@@ -1,7 +1,6 @@
 import { NavLink } from "react-router";
 
-export default function LoggedUserHeader({username, logout}: object) {
-
+export default function LoggedUserHeader({ username, logout }: object) {
   return (
     <h5>
       return (

@@ -1,4 +1,4 @@
-export default function AccordionParent({title, children}: object) {
+export default function AccordionParent({ title, children }: object) {
   return (
     <div className="space-y-2">
       <details
