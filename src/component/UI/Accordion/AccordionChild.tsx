@@ -25,7 +25,7 @@ export default function AccordionChild(props) {
         </summary>
 
         <div className="p-4">
-          <p className="text-gray-700">{props.text}</p>
+          <p className="text-gray-700">{props.children}</p>
         </div>
       </details>
     </div>
