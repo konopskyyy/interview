@@ -1,9 +1,9 @@
-export default function AccordionParent(props) {
+export default function AccordionParent(props: any) {
   return (
     <div className="space-y-2">
       <details
         className="group space-y-2 [&amp;_summary::-webkit-details-marker]:hidden"
-        open=""
+        open={false}
       >
         <summary className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-200 bg-white px-4 py-3 font-medium text-gray-900 hover:bg-gray-50 mt-2">
           <span>{props.title}</span>

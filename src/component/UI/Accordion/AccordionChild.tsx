@@ -3,7 +3,7 @@ export default function AccordionChild(props: any) {
     <div className="space-y-2 pl-4">
       <details
         className="group/members [&amp;_summary::-webkit-details-marker]:hidden"
-        open=""
+        open={false}
       >
         <summary className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-200 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100">
           <span>{props.title}</span>

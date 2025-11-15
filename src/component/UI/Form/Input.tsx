@@ -1,4 +1,6 @@
-import {Dispatch, SetStateAction, useId} from "react";
+import type { Dispatch, SetStateAction } from "react";
+import { useId } from "react";
+
 
 interface InputProps {
     fieldName: string;
