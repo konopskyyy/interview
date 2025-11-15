@@ -1,11 +1,14 @@
 import type { ReactNode } from "react";
 
 interface AccordionParentProps {
-    title: string;
-    children: ReactNode;
+  title: string;
+  children: ReactNode;
 }
 
-export default function AccordionParent({ title, children }: AccordionParentProps) {
+export default function AccordionParent({
+  title,
+  children,
+}: AccordionParentProps) {
   return (
     <div className="space-y-2">
       <details

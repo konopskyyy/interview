@@ -1,11 +1,14 @@
 import { NavLink } from "react-router";
 
 interface LoggedUserHeaderProps {
-    username: string;
-    logout: () => void;
+  username: string;
+  logout: () => void;
 }
 
-export default function LoggedUserHeader({ username, logout }: LoggedUserHeaderProps) {
+export default function LoggedUserHeader({
+  username,
+  logout,
+}: LoggedUserHeaderProps) {
   return (
     <h5>
       return (

@@ -1,11 +1,11 @@
 import BaseModal from "../UI/Modal/BaseModal.tsx";
-import {useState} from "react";
-import type {Dispatch, SetStateAction} from "react";
+import { useState } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import type { ChangeEvent } from "react";
 
 interface AddRecruiterModalProps {
-    recruiters: string[];
-    setRecruiters: Dispatch<SetStateAction<string[]>>;
+  recruiters: string[];
+  setRecruiters: Dispatch<SetStateAction<string[]>>;
 }
 
 export default function AddRecruiterModal({

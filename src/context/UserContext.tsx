@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 
-import {createContext, useState, useEffect} from "react";
-import type {ReactNode} from "react"
+import { createContext, useState, useEffect } from "react";
+import type { ReactNode } from "react";
 import { useNavigate } from "react-router";
 
 interface UserInterface {
@@ -17,7 +17,7 @@ interface UserContextInterface {
 }
 
 interface UserContextProviderProps {
-    children: ReactNode;
+  children: ReactNode;
 }
 
 export const UserContext = createContext<UserContextInterface | null>(null);
