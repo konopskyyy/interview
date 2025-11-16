@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { UserContext } from "../../context/UserContext";
 import Input from "../UI/Form/Input";
 import SendFormButton from "../UI/Form/SendFormButton";
+import {userLogin} from "../../service/QuestionApiClient.ts";
 
 export default function LoginForm() {
   const [name, setName] = useState("");
@@ -15,16 +16,7 @@ export default function LoginForm() {
   const mutation = useMutation({
     mutationKey: ["login"],
     mutationFn: (user: { username: string; password: string }) =>
-      fetch("https://questions.tojest.dev/api/login_check", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(user),
-      }).then((res) => {
-        if (!res.ok) {
-          throw new Error("Błąd logowania");
-        }
-        return res.json();
-      }),
+      userLogin(user)
   });
 
   const isLoading = mutation.status === "pending";

@@ -2,30 +2,42 @@ import { useState } from "react";
 import type { FormEvent } from "react";
 import Input from "../UI/Form/Input.tsx";
 import SendFormButton from "../UI/Form/SendFormButton.tsx";
+import {useMutation} from "@tanstack/react-query";
+import {userRegister} from "../../service/QuestionApiClient.ts";
 
 export default function RegisterForm() {
   const [name, setName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [retypedpassword, setretypedpassword] = useState<string>("");
 
+  const mutation = useMutation({
+    mutationKey: ["register"],
+    mutationFn: (user: { email: string; password: string }) =>
+      userRegister(user)
+  });
+
+  const isLoading = mutation.status === "pending";
+  const isError = mutation.status === "error";
+  const error = mutation.error;
   async function sendForm(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (password != retypedpassword) {
       alert("hasla nie zgadzaja sie");
       return;
     }
-    const response = await fetch("https://questions.tojest.dev/api/user", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+
+    mutation.mutate(
+      { email: name, password: password },
+      {
+        onSuccess() {
+            alert('sukces');
+        },
+        onError(error) {
+          alert((error as Error).message);
+        },
       },
-      body: JSON.stringify({
-        email: name,
-        password: password,
-      }),
-    });
-    const data = await response.json();
-    alert(JSON.stringify(data));
+    );
+
   }
 
   return (
@@ -43,7 +55,13 @@ export default function RegisterForm() {
         name={retypedpassword}
         setName={setretypedpassword}
       />
-      <SendFormButton text="Wyslij" />
+      <SendFormButton
+        disabled={isLoading}
+        text={isLoading ? "Logowanie..." : "Rejestruj"}
+      />
+      {isError && (
+        <p style={{ color: "red" }}>Błąd: {(error as Error)?.message}</p>
+      )}
     </form>
   );
 }
