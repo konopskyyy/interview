@@ -2,8 +2,8 @@ import AccordionChild from "../../component/UI/Accordion/AccordionChild.tsx";
 import AccordionParent from "../../component/UI/Accordion/AccordionParent.tsx";
 import InterviewQuickInfo from "../../component/Interview/InterviewQuickInfo.tsx";
 import AddInterviewModal from "../../component/Interview/AddInterviewModal.tsx";
-import {useContext} from "react";
-import {InterviewContext} from "../../context/InterviewContext.tsx";
+import { useContext } from "react";
+import { InterviewContext } from "../../context/InterviewContext.tsx";
 
 export default function InterviewList() {
   const context = useContext(InterviewContext);
@@ -20,12 +20,11 @@ export default function InterviewList() {
       <AccordionParent title="Rekrutacje rozpoczęte">
         {interviews.map((interview) => {
           return (
-          <AccordionChild title={interview.code + " - " + interview.position}>
-            <InterviewQuickInfo />
-          </AccordionChild>
-          )
+            <AccordionChild title={interview.code + " - " + interview.position}>
+              <InterviewQuickInfo />
+            </AccordionChild>
+          );
         })}
-
       </AccordionParent>
 
       <AccordionParent title="Rekrutacje zakończone">

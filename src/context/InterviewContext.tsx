@@ -9,24 +9,31 @@ interface Interview {
 interface InterviewContextInterface {
   interviews: Interview[];
   setInterviews: React.Dispatch<React.SetStateAction<Interview[]>>;
-  addInterview: () => void
+  addInterview: (interview: Interview) => void;
 }
 
-export const InterviewContext = createContext<InterviewContextInterface | null>(null);
+export const InterviewContext = createContext<InterviewContextInterface | null>(
+  null,
+);
 
-export const InterviewContextProvider = ({ children }: { children: ReactNode }) => {
+export const InterviewContextProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}) => {
   const [interviews, setInterviews] = useState<Interview[]>([
     { code: "ABC", position: "Hr specialist" },
     { code: "DEF", position: "Software developer" },
   ]);
 
-  function addInterview(interview: Interview)
-  {
-    setInterviews(prev => [...prev, interview]);
+  function addInterview(interview: Interview) {
+    setInterviews((prev) => [...prev, interview]);
   }
 
   return (
-    <InterviewContext.Provider value={{ interviews, setInterviews, addInterview }}>
+    <InterviewContext.Provider
+      value={{ interviews, setInterviews, addInterview }}
+    >
       {children}
     </InterviewContext.Provider>
   );
