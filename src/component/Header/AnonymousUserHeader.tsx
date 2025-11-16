@@ -12,11 +12,6 @@ export default function AnonymousUserHeader() {
             </NavLink>{" "}
           </li>
           <li>
-            <NavLink to="/" className="hover:text-white">
-              Aplikacja
-            </NavLink>
-          </li>
-          <li>
             <NavLink to="/register" className="hover:text-white">
               Zarejestruj
             </NavLink>
