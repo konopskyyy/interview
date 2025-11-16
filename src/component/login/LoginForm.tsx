@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import { UserContext } from "../../context/UserContext";
 import Input from "../UI/Form/Input";
 import SendFormButton from "../UI/Form/SendFormButton";
-import {userLogin} from "../../service/QuestionApiClient.ts";
+import { userLogin } from "../../service/QuestionApiClient.ts";
 
 export default function LoginForm() {
   const [name, setName] = useState("");
@@ -16,7 +16,7 @@ export default function LoginForm() {
   const mutation = useMutation({
     mutationKey: ["login"],
     mutationFn: (user: { username: string; password: string }) =>
-      userLogin(user)
+      userLogin(user),
   });
 
   const isLoading = mutation.status === "pending";

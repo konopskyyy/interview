@@ -2,8 +2,8 @@ import { useState } from "react";
 import type { FormEvent } from "react";
 import Input from "../UI/Form/Input.tsx";
 import SendFormButton from "../UI/Form/SendFormButton.tsx";
-import {useMutation} from "@tanstack/react-query";
-import {userRegister} from "../../service/QuestionApiClient.ts";
+import { useMutation } from "@tanstack/react-query";
+import { userRegister } from "../../service/QuestionApiClient.ts";
 
 export default function RegisterForm() {
   const [name, setName] = useState<string>("");
@@ -13,7 +13,7 @@ export default function RegisterForm() {
   const mutation = useMutation({
     mutationKey: ["register"],
     mutationFn: (user: { email: string; password: string }) =>
-      userRegister(user)
+      userRegister(user),
   });
 
   const isLoading = mutation.status === "pending";
@@ -30,14 +30,13 @@ export default function RegisterForm() {
       { email: name, password: password },
       {
         onSuccess() {
-            alert('sukces');
+          alert("sukces");
         },
         onError(error) {
           alert((error as Error).message);
         },
       },
     );
-
   }
 
   return (
