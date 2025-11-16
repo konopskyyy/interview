@@ -1,10 +1,13 @@
 import BaseModal from "../UI/Modal/BaseModal.tsx";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { InterviewContext } from "../../context/InterviewContext.tsx";
 import SendFormButton from "../UI/Form/SendFormButton.tsx";
+import Input from "../UI/Form/Input.tsx";
 
 export default function AddInterviewModal() {
   const context = useContext(InterviewContext);
+  const [code, setCode] = useState<string>("");
+  const [position, setPosition] = useState<string>("");
 
   if (!context) {
     return null;
@@ -12,7 +15,7 @@ export default function AddInterviewModal() {
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-    context!.addInterview({ code: "XYZ", position: "eee" });
+    context!.addInterview({ code: code, position: position });
   }
 
   return (
@@ -21,6 +24,8 @@ export default function AddInterviewModal() {
       <p>Formularz do dodawania kandydata...</p>
 
       <form onSubmit={handleSubmit}>
+        <Input fieldName="code" name={code} setName={setCode} />
+        <Input fieldName="position" name={position} setName={setPosition} />
         <SendFormButton text="Wyslij" />
       </form>
     </BaseModal>
