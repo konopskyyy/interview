@@ -21,7 +21,7 @@ export default function InterviewList() {
         {interviews.map((interview) => {
           return (
             <AccordionChild title={interview.code + " - " + interview.position}>
-              <InterviewQuickInfo />
+              <InterviewQuickInfo interview={interview} />
             </AccordionChild>
           );
         })}

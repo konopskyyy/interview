@@ -1,56 +1,53 @@
 import BaseModal from "../UI/Modal/BaseModal.tsx";
-import { useState } from "react";
-import type { Dispatch, SetStateAction } from "react";
+import { useState, useContext } from "react";
 import type { ChangeEvent } from "react";
+import { InterviewContext } from "../../context/InterviewContext.tsx";
+
+interface Recruiter {
+  id: string;
+  name: string;
+}
 
 interface AddRecruiterModalProps {
-  recruiters: string[];
-  setRecruiters: Dispatch<SetStateAction<string[]>>;
+  interviewCode: string;
+  availableRecruiters: Recruiter[];
 }
 
 export default function AddRecruiterModal({
-  recruiters,
-  setRecruiters,
-}: AddRecruiterModalProps) {
-  const [disabledNone, setDisabledNone] = useState(false);
+                                            interviewCode,
+                                            availableRecruiters,
+                                          }: AddRecruiterModalProps) {
+  const context = useContext(InterviewContext);
+  if (!context) return null; // lub jakiś fallback
 
-  function handleAddRecruiter(e: ChangeEvent<HTMLSelectElement>): void {
-    setDisabledNone(true);
-    const newRecruiters = [...recruiters, e.target.value];
-    setRecruiters(newRecruiters);
-  }
+  const { addRecruiter } = context;
+  const [selectedId, setSelectedId] = useState<string>("none");
 
-  function handleRemoveRecruiter(key: number): void {
-    setDisabledNone(true);
-    const newRecruiters = recruiters.filter(
-      (_: string, index: number) => index != key,
-    );
-    setRecruiters(newRecruiters);
-  }
+  const handleAddRecruiter = (e: ChangeEvent<HTMLSelectElement>) => {
+    const id = e.target.value;
+    setSelectedId(id);
+    if (id === "none") return;
+
+    const recruiter = availableRecruiters.find((r) => r.id === id);
+    if (recruiter) {
+      addRecruiter(interviewCode, recruiter);
+      setSelectedId("none");
+    }
+  };
 
   return (
-    <BaseModal title="Dodaj rekrutera">
-      <h2 className="text-xl font-semibold mb-4">Dodaj Rekrutera</h2>
-      <p>Rekruterzy:</p>
-      {recruiters.map((recruiter: string, key: number) => {
-        return (
-          <>
-            <div>
-              {recruiter}{" "}
-              <button onClick={() => handleRemoveRecruiter(key)}>X</button>
-            </div>
-          </>
-        );
-      })}
-
+    <BaseModal title="Dodaj Rekrutera">
       <p>Wybierz z listy</p>
-      <form>
-        <select onChange={handleAddRecruiter} value="none">
-          <option disabled={disabledNone}>none</option>
-          <option>aaa</option>
-          <option>bbb</option>
-        </select>
-      </form>
+      <select onChange={handleAddRecruiter} value={selectedId}>
+        <option value="none" disabled>
+          -- wybierz --
+        </option>
+        {availableRecruiters.map((r) => (
+          <option key={r.id} value={r.id}>
+            {r.name}
+          </option>
+        ))}
+      </select>
     </BaseModal>
   );
 }
