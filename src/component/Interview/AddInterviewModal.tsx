@@ -48,16 +48,22 @@ export default function AddInterviewModal() {
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
+
+    // Dodajemy pojedynczą nową rozmowę z rekruterami
     context.addInterview({ code, position, recruiters });
-    // opcjonalne czyszczenie
+
+    // Czyścimy pola formularza po dodaniu
     setCode("");
     setPosition("");
     setRecruiters([]);
+    setSelectedRecruiterId("none");
   }
 
   return (
     <BaseModal title="Dodaj rozmowę">
       <h2 className="right-0 text-xl font-semibold mb-4">Dodaj rozmowę</h2>
+      <p>Formularz do dodawania rozmowy...</p>
+
       <form onSubmit={handleSubmit}>
         <Input fieldName="code" name={code} setName={setCode} />
         <Input fieldName="position" name={position} setName={setPosition} />
