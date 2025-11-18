@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 interface AccordionParentProps {
   title: string;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export default function AccordionParent({

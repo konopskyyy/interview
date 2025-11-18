@@ -1,21 +1,49 @@
 import AddRecruiterModal from "./AddRecruiterModal.tsx";
 import AddCandidateModal from "./AddCandidateModal.tsx";
-import { useState } from "react";
+import {
+  type Interview,
+  InterviewContext,
+} from "../../context/InterviewContext.tsx";
+import { useContext } from "react";
 
-export default function InterviewQuickInfo() {
-  const [recruiters, setRecruiters] = useState<string[]>([]);
+interface InterviewQuickInfoProps {
+  interview: Interview;
+}
+
+const availableRecruiters = [
+  { id: "1", name: "Anna Kowalska" },
+  { id: "2", name: "Jan Nowak" },
+  { id: "3", name: "Ewa Wiśniewska" },
+  { id: "4", name: "Marek Zalewski" },
+];
+
+export default function InterviewQuickInfo({
+  interview,
+}: InterviewQuickInfoProps) {
+  const context = useContext(InterviewContext);
+  if (!context) return null;
+  if (!interview) return null;
+
+  const { removeRecruiter } = context;
 
   return (
     <>
       <div className="grid grid-cols-3 gap-4">
         <div>
-          {recruiters.map((recruiter) => {
-            return <p>{recruiter}</p>;
-          })}
+          {interview.recruiters?.map((recruiter) => (
+            <p key={recruiter.id}>
+              {recruiter.id} {recruiter.name}{" "}
+              <button
+                onClick={() => removeRecruiter(interview.code, recruiter.id)}
+              >
+                X
+              </button>
+            </p>
+          ))}
 
           <AddRecruiterModal
-            recruiters={recruiters}
-            setRecruiters={setRecruiters}
+            interviewCode={interview.code}
+            availableRecruiters={availableRecruiters}
           />
         </div>
         <div>
