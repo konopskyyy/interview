@@ -14,14 +14,15 @@ interface AddRecruiterModalProps {
 }
 
 export default function AddRecruiterModal({
-                                            interviewCode,
-                                            availableRecruiters,
-                                          }: AddRecruiterModalProps) {
+  interviewCode,
+  availableRecruiters,
+}: AddRecruiterModalProps) {
   const context = useContext(InterviewContext);
-  if (!context) return null; // lub jakiś fallback
+  const [selectedId, setSelectedId] = useState<string>("none");
+
+  if (!context) return null;
 
   const { addRecruiter } = context;
-  const [selectedId, setSelectedId] = useState<string>("none");
 
   const handleAddRecruiter = (e: ChangeEvent<HTMLSelectElement>) => {
     const id = e.target.value;

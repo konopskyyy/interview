@@ -19,7 +19,7 @@ interface InterviewContextInterface {
   setInterviews: React.Dispatch<React.SetStateAction<Interview[]>>;
   addInterview: (interview: Interview) => void;
   addRecruiter: (code: string, recruiter: Recruiter) => void;
-  removeRecruiter: (code: string, recruiter: Recruiter) => void;
+  removeRecruiter: (code: string, recruiterId: string) => void;
 }
 
 export const InterviewContext = createContext<InterviewContextInterface | null>(
@@ -32,8 +32,22 @@ export const InterviewContextProvider = ({
   children: ReactNode;
 }) => {
   const [interviews, setInterviews] = useState<Interview[]>([
-    { code: "ABC", position: "Hr specialist", recruiters: [{id: 5, name: "Edward"}, {id: 6, name: "Enrike"}] },
-    { code: "DEF", position: "Software developer", recruiters: [{id: 7, name: "Andrzej"}, {id: 8, name: "Pietrek"}] },
+    {
+      code: "ABC",
+      position: "Hr specialist",
+      recruiters: [
+        { id: "5", name: "Edward" },
+        { id: "6", name: "Enrike" },
+      ],
+    },
+    {
+      code: "DEF",
+      position: "Software developer",
+      recruiters: [
+        { id: "7", name: "Andrzej" },
+        { id: "8", name: "Pietrek" },
+      ],
+    },
   ]);
 
   function addInterview(interview: Interview) {
@@ -55,11 +69,11 @@ export const InterviewContextProvider = ({
       prev.map((interview) =>
         interview.code === code
           ? {
-            ...interview,
-            recruiters: interview.recruiters.filter(
-              (r) => r.id !== recruiterId
-            ),
-          }
+              ...interview,
+              recruiters: interview.recruiters.filter(
+                (r) => r.id !== recruiterId,
+              ),
+            }
           : interview,
       ),
     );
@@ -67,7 +81,13 @@ export const InterviewContextProvider = ({
 
   return (
     <InterviewContext.Provider
-      value={{ interviews, setInterviews, addInterview, addRecruiter, removeRecruiter }}
+      value={{
+        interviews,
+        setInterviews,
+        addInterview,
+        addRecruiter,
+        removeRecruiter,
+      }}
     >
       {children}
     </InterviewContext.Provider>

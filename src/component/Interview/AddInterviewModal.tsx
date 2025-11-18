@@ -20,7 +20,8 @@ export default function AddInterviewModal() {
   const context = useContext(InterviewContext);
   const [code, setCode] = useState<string>("");
   const [position, setPosition] = useState<string>("");
-  const [selectedRecruiterId, setSelectedRecruiterId] = useState<string>("none");
+  const [selectedRecruiterId, setSelectedRecruiterId] =
+    useState<string>("none");
   const [recruiters, setRecruiters] = useState<Recruiter[]>([]);
 
   if (!context) {
@@ -49,8 +50,7 @@ export default function AddInterviewModal() {
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
 
-    // Dodajemy pojedynczą nową rozmowę z rekruterami
-    context.addInterview({ code, position, recruiters });
+    context?.addInterview({ code, position, recruiters });
 
     // Czyścimy pola formularza po dodaniu
     setCode("");

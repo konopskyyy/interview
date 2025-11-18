@@ -1,7 +1,10 @@
 import AddRecruiterModal from "./AddRecruiterModal.tsx";
 import AddCandidateModal from "./AddCandidateModal.tsx";
-import {type Interview, InterviewContext} from "../../context/InterviewContext.tsx";
-import {useContext} from "react";
+import {
+  type Interview,
+  InterviewContext,
+} from "../../context/InterviewContext.tsx";
+import { useContext } from "react";
 
 interface InterviewQuickInfoProps {
   interview: Interview;
@@ -14,7 +17,9 @@ const availableRecruiters = [
   { id: "4", name: "Marek Zalewski" },
 ];
 
-export default function InterviewQuickInfo({ interview }: InterviewQuickInfoProps) {
+export default function InterviewQuickInfo({
+  interview,
+}: InterviewQuickInfoProps) {
   const context = useContext(InterviewContext);
   if (!context) return null;
   if (!interview) return null;
@@ -27,16 +32,17 @@ export default function InterviewQuickInfo({ interview }: InterviewQuickInfoProp
         <div>
           {interview.recruiters?.map((recruiter) => (
             <p key={recruiter.id}>
-              {recruiter.id} {recruiter.name} {" "}
-              <button onClick={() => removeRecruiter(interview.code, recruiter.id)}>
-                 X
+              {recruiter.id} {recruiter.name}{" "}
+              <button
+                onClick={() => removeRecruiter(interview.code, recruiter.id)}
+              >
+                X
               </button>
             </p>
           ))}
 
           <AddRecruiterModal
             interviewCode={interview.code}
-            recruiters={interview.recruiters}
             availableRecruiters={availableRecruiters}
           />
         </div>
