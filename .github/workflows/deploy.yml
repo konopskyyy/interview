@@ -38,5 +38,5 @@ jobs:
             rsync -avz --delete --exclude '.env' -e "ssh -p ${{ secrets.SSH_PORT }}" ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_FRONTEND_PATH }}
           else
             echo "Klucz SSH nie działa, próbuję przez hasło."
-            sshpass -p "${{ secrets.SSH_PASSWORD }}" rsync -avz --delete --exclude '.env' -e "ssh -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }}" ./frontend/build/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_FRONTEND_PATH }}
+            sshpass -p "${{ secrets.SSH_PASSWORD }}" rsync -avz --delete --exclude '.env' -e "ssh -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }}" ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_FRONTEND_PATH }}
           fi
