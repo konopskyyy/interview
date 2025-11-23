@@ -1,7 +1,7 @@
 name: Deploy Frontend
 
 on:
-  workflow_dispatch: # manualny trigger przez guzik
+  workflow_dispatch:
 
 jobs:
   deploy-frontend:
@@ -16,7 +16,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"  # Lub wersja wg projektu
+          node-version: "22"
 
       - name: Install npm dependencies
         run: npm ci
