@@ -6,6 +6,7 @@ on:
 jobs:
   deploy-frontend:
     name: Deploy frontend to server
+    environment: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
