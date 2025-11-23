@@ -17,6 +17,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22"
+
       - name: ls
         run: ls -al
 
@@ -25,11 +26,12 @@ jobs:
 
       - name: Install npm dependencies
         run: npm ci
-        working-directory: ./frontend
 
       - name: Build frontend
         run: npm run build
-        working-directory: ./frontend
+
+      - name: ls
+        run: ls -al
 
       - name: List files after build (debug)
         run: ls -l ./frontend/build
