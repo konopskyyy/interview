@@ -1,0 +1,36 @@
+name: Deploy Frontend
+
+on:
+  workflow_dispatch: # manualny trigger przez guzik
+
+jobs:
+  deploy-frontend:
+    name: Deploy frontend to server
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"  # Lub wersja wg projektu
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Build frontend
+        run: npm run build
+
+      - name: Rsync built files to server (excluding .env, node_modules)
+        run: |
+          set -e
+          if ssh -p ${{ secrets.SSH_PORT }} -o BatchMode=yes -o ConnectTimeout=5 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'echo ok' 2>/dev/null; then
+            echo "Połączenie przez klucz SSH działa."
+            rsync -avz --delete --exclude '.env' -e "ssh -p ${{ secrets.SSH_PORT }}" ./build/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_FRONTEND_PATH }}
+          else
+            echo "Klucz SSH nie działa, próbuję przez hasło."
+            sshpass -p "${{ secrets.SSH_PASSWORD }}" rsync -avz --delete --exclude '.env' -e "ssh -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no" ./build/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_FRONTEND_PATH }}
+          fi
