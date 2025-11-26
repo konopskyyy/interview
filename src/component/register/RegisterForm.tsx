@@ -41,18 +41,18 @@ export default function RegisterForm() {
 
   return (
     <form onSubmit={sendForm}>
-      <Input fieldName="name" name={name} setName={setName} />
+      <Input fieldName="name" fieldValue={name} setFieldValue={setName} />
       <Input
         fieldName="password"
         type="password"
-        name={password}
-        setName={setPassword}
+        fieldValue={password}
+        setFieldValue={setPassword}
       />
       <Input
         fieldName="retype-password"
         type="password"
-        name={retypedpassword}
-        setName={setretypedpassword}
+        fieldValue={retypedpassword}
+        setFieldValue={setretypedpassword}
       />
       <SendFormButton
         disabled={isLoading}
