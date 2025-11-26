@@ -5,16 +5,16 @@ interface InputProps {
   fieldName: string;
   type?: string;
   disabled?: boolean;
-  name: string;
-  setName: Dispatch<SetStateAction<string>>;
+  fieldValue: string;
+  setFieldValue: Dispatch<SetStateAction<string>>;
 }
 
 export default function Input({
   fieldName,
   type = "text",
   disabled = false,
-  name,
-  setName,
+  fieldValue,
+  setFieldValue,
 }: InputProps) {
   const id = useId();
 
@@ -30,8 +30,8 @@ export default function Input({
         id={id}
         type={type}
         disabled={disabled}
-        value={name}
-        onChange={(e) => setName(e.target.value)}
+        value={fieldValue}
+        onChange={(e) => setFieldValue(e.target.value)}
         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
       />
     </>

@@ -1,0 +1,3 @@
+eslint .
+npm run build
+prettier --write .

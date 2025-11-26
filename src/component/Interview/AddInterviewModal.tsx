@@ -52,7 +52,6 @@ export default function AddInterviewModal() {
 
     context?.addInterview({ code, position, recruiters });
 
-    // Czyścimy pola formularza po dodaniu
     setCode("");
     setPosition("");
     setRecruiters([]);
@@ -65,8 +64,12 @@ export default function AddInterviewModal() {
       <p>Formularz do dodawania rozmowy...</p>
 
       <form onSubmit={handleSubmit}>
-        <Input fieldName="code" name={code} setName={setCode} />
-        <Input fieldName="position" name={position} setName={setPosition} />
+        <Input fieldName="code" fieldValue={code} setFieldValue={setCode} />
+        <Input
+          fieldName="position"
+          fieldValue={position}
+          setFieldValue={setPosition}
+        />
 
         <div>
           <h3>Dodaj Rekrutera z listy</h3>
