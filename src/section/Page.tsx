@@ -4,7 +4,8 @@ import LoginForm from "../component/login/LoginForm.tsx";
 import RemindMeForm from "../component/remind-me/RemindMeForm.tsx";
 import NotFound from "./NotFound.tsx";
 import AccountPage from "../page/account/AccountPage.tsx";
-import InterviewList from "../page/InterviewList/InterviewList.tsx";
+import InterviewList from "../page/Interview/InterviewList.tsx";
+import Interview from "../page/Interview/Interview.tsx";
 
 export default function Page() {
   return (
@@ -16,6 +17,7 @@ export default function Page() {
         <Route path="/remind-me" element={<RemindMeForm />} />
         <Route path="/account" element={<AccountPage />} />
         <Route path="/interview-list" element={<InterviewList />} />
+        <Route path="/interview/:id" element={<Interview />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
