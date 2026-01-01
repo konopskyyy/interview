@@ -8,6 +8,7 @@ export default function Interview() {
     //todo to z api
     const interview: Interview = {
         id: params.id,
+        code: "XYZ-1",
         position: "aaa",
         recruiters: [
             {
