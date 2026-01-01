@@ -20,7 +20,10 @@ export default function InterviewList() {
       <AccordionParent title="Rekrutacje rozpoczęte">
         {interviews.map((interview) => {
           return (
-            <AccordionChild id={interview.id ?? ''} title={`${interview.code ?? ''} + " - " + ${interview.position ?? ''}`}>
+            <AccordionChild
+              id={interview.id ?? ""}
+              title={`${interview.code ?? ""} + " - " + ${interview.position ?? ""}`}
+            >
               <InterviewQuickInfo interview={interview} />
             </AccordionChild>
           );

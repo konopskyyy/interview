@@ -4,11 +4,11 @@ import React, { createContext, useState } from "react";
 import type { ReactNode } from "react";
 
 export interface Interview {
-    id?: string,
+  id?: string;
   code: string;
   position: string;
   recruiters: Recruiter[];
-  candidates?: Candidate[]
+  candidates?: Candidate[];
 }
 
 interface Recruiter {
@@ -17,8 +17,8 @@ interface Recruiter {
 }
 
 interface Candidate {
-    id: string;
-    name: string;
+  id: string;
+  name: string;
 }
 
 interface InterviewContextInterface {
@@ -40,7 +40,7 @@ export const InterviewContextProvider = ({
 }) => {
   const [interviews, setInterviews] = useState<Interview[]>([
     {
-        id: "aaa-bb-ccc",
+      id: "aaa-bb-ccc",
       code: "ABC",
       position: "Hr specialist",
       recruiters: [
@@ -49,7 +49,7 @@ export const InterviewContextProvider = ({
       ],
     },
     {
-        id: "eeee-fff-hhh",
+      id: "eeee-fff-hhh",
       code: "DEF",
       position: "Software developer",
       recruiters: [

@@ -1,24 +1,24 @@
 import type { ReactNode } from "react";
-import {useNavigate} from "react-router";
+import { useNavigate } from "react-router";
 
 interface AccordionChildProps {
-    id: string
+  id: string;
   title: string;
   children: ReactNode;
 }
 
 export default function AccordionChild({
-    id,
+  id,
   title,
   children,
 }: AccordionChildProps) {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    function handleMoveToInterview(id: string) {
-        navigate("/interview/" + id)
-    }
+  function handleMoveToInterview(id: string) {
+    navigate("/interview/" + id);
+  }
 
-    return (
+  return (
     <div className="space-y-2 pl-4">
       <details
         className="group/members [&amp;_summary::-webkit-details-marker]:hidden"
@@ -40,7 +40,12 @@ export default function AccordionChild({
               d="M19 9l-7 7-7-7"
             ></path>
           </svg>
-            <button onClick={() =>handleMoveToInterview(id)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Przejdź</button>
+          <button
+            onClick={() => handleMoveToInterview(id)}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Przejdź
+          </button>
         </summary>
 
         <div className="p-4">
