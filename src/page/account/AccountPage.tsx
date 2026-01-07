@@ -24,8 +24,6 @@ export default function AccountPage() {
 
   return (
     <>
-      <h2>Nazwa użytkownika: {context.user.username}</h2>
-
       <div className="-mb-px border-b border-gray-200">
         <div role="tablist" className="flex gap-1">
           <button
@@ -50,7 +48,12 @@ export default function AccountPage() {
 
       <div role="tabpanel" className="mt-4">
         <p className="text-gray-700">
-          {currentTab == "profile" && <h2>panel użytkownika</h2>}
+          {currentTab == "profile" && (
+            <>
+              <h2>panel użytkownika</h2>
+              <p>Nazwa użytkownika: {context.user.username}</p>
+            </>
+          )}
 
           {currentTab == "organization" && !context.getOrganizationId() && (
             <AccountPageAddOrganization />
