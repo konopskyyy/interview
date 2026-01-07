@@ -6,12 +6,14 @@ import { useNavigate } from "react-router";
 
 interface UserInterface {
   username: string;
+  organizationId: string;
 }
 
 interface UserContextInterface {
   user: UserInterface | null;
   isLogged: () => boolean;
   getUsername: () => string;
+  getOrganizationId: () => string;
   login: (token: string) => void;
   logout: () => void;
 }
@@ -27,7 +29,7 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("user_token");
+    const token = sessionStorage.getItem("user_token");
     if (token) {
       setUser(decode(token));
     }
@@ -38,13 +40,17 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
   }
 
   function logout(): void {
-    localStorage.removeItem("user_token");
+    sessionStorage.removeItem("user_token");
     setUser(null);
     navigate("/");
   }
 
   function getUsername(): string {
     return user?.username || "";
+  }
+
+  function getOrganizationId(): string {
+    return user?.organizationId || "";
   }
 
   function decode(token: string): UserInterface {
@@ -60,13 +66,13 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
   }
 
   function login(token: string) {
-    localStorage.setItem("user_token", token);
+    sessionStorage.setItem("user_token", token);
     setUser(decode(token));
   }
 
   return (
     <UserContext.Provider
-      value={{ user, isLogged, getUsername, login, logout }}
+      value={{ user, isLogged, getUsername, getOrganizationId, login, logout }}
     >
       {children}
     </UserContext.Provider>
