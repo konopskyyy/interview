@@ -3,6 +3,7 @@ export function post(url: string, body: object, errorMessage: string) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "Authorization": sessionStorage.getItem("user_token") ? ("Bearer " + sessionStorage.getItem("user_token")) : ""
     },
     body: JSON.stringify(body),
   }).then((res) => {

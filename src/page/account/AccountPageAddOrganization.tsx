@@ -1,6 +1,9 @@
 import Input from "../../component/UI/Form/Input.tsx";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import SendFormButton from "../../component/UI/Form/SendFormButton.tsx";
+import { createOrganization } from "../../service/OrganizationApiClient.ts";
+import { useMutation } from "@tanstack/react-query";
+import type { organizationBody } from "../../service/OrganizationApiClient.ts";
 
 export default function AccountPageAddOrganization() {
   const [newOrganizationCode, setNewOrganizationCode] = useState<string>("");
@@ -14,9 +17,46 @@ export default function AccountPageAddOrganization() {
   const [addressPostalCode, setAddressPostalCode] = useState<string>("");
   const [addressCountry, setAddressCountry] = useState<string>("Polska");
 
-  function handleSubmitOrganizationCode() {}
+  const mutation = useMutation({
+    mutationKey: ["createOrganization"],
+    mutationFn: (organization: organizationBody) =>
+      createOrganization(organization),
+  });
 
-  function handleSubmitCreateOrganization() {}
+  const isLoading = mutation.status === "pending";
+  const isError = mutation.status === "error";
+  const error = mutation.error;
+
+  function handleSubmitOrganizationCode() { }
+
+  function handleSubmitCreateOrganization(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    mutation.mutate(
+      {
+        name: newOrganizationName,
+        logo: logo,
+        taxId: taxId,
+        address: {
+          street: addressStreet,
+          buildingNo: addressBuildingNo,
+          apartmentNo: addressApartmentNo,
+          city: addressCity,
+          postalCode: addressPostalCode,
+          country: addressCountry
+        },
+        recruiters: []
+      },
+      {
+        onSuccess() {
+          alert("sukces");
+        },
+        onError(error) {
+          alert((error as Error).message);
+        },
+      },
+    );
+  }
 
   return (
     <>
