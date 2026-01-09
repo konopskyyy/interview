@@ -13,7 +13,8 @@ export type organizationBody = {
     postalCode: string,
     country: string
   },
-  recruiters: string[]
+  recruiters: string[],
+  candidates: string[]
 };
 
 export function createOrganization(organization: organizationBody) {

@@ -45,7 +45,8 @@ export default function AccountPageAddOrganization() {
           postalCode: addressPostalCode,
           country: addressCountry
         },
-        recruiters: []
+        recruiters: [],
+        candidates: []
       },
       {
         onSuccess() {
@@ -120,7 +121,13 @@ export default function AccountPageAddOrganization() {
               setFieldValue={setAddressCountry}
             />
 
-            <SendFormButton text="Załóż organizację" />
+            <SendFormButton
+              disabled={isLoading}
+              text={isLoading ? "Czekaj..." : "Stwórz organizację"}
+            />
+            {isError && (
+              <p style={{ color: "red" }}>Błąd: {(error as Error)?.message}</p>
+            )}
           </form>
         </div>
         <div className="p-8">Twoje zaproszenia do organizacji</div>
