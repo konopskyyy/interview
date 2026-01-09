@@ -1,6 +1,9 @@
 import Input from "../../component/UI/Form/Input.tsx";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import SendFormButton from "../../component/UI/Form/SendFormButton.tsx";
+import { createOrganization } from "../../service/OrganizationApiClient.ts";
+import { useMutation } from "@tanstack/react-query";
+import type { organizationBody } from "../../service/OrganizationApiClient.ts";
 
 export default function AccountPageAddOrganization() {
   const [newOrganizationCode, setNewOrganizationCode] = useState<string>("");
@@ -14,9 +17,47 @@ export default function AccountPageAddOrganization() {
   const [addressPostalCode, setAddressPostalCode] = useState<string>("");
   const [addressCountry, setAddressCountry] = useState<string>("Polska");
 
+  const mutation = useMutation({
+    mutationKey: ["createOrganization"],
+    mutationFn: (organization: organizationBody) =>
+      createOrganization(organization),
+  });
+
+  const isLoading = mutation.status === "pending";
+  const isError = mutation.status === "error";
+  const error = mutation.error;
+
   function handleSubmitOrganizationCode() {}
 
-  function handleSubmitCreateOrganization() {}
+  function handleSubmitCreateOrganization(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    mutation.mutate(
+      {
+        name: newOrganizationName,
+        logo: logo,
+        taxId: taxId,
+        address: {
+          street: addressStreet,
+          buildingNo: addressBuildingNo,
+          apartmentNo: addressApartmentNo,
+          city: addressCity,
+          postalCode: addressPostalCode,
+          country: addressCountry,
+        },
+        recruiters: [],
+        candidates: [],
+      },
+      {
+        onSuccess() {
+          alert("sukces");
+        },
+        onError(error) {
+          alert((error as Error).message);
+        },
+      },
+    );
+  }
 
   return (
     <>
@@ -80,7 +121,13 @@ export default function AccountPageAddOrganization() {
               setFieldValue={setAddressCountry}
             />
 
-            <SendFormButton text="Załóż organizację" />
+            <SendFormButton
+              disabled={isLoading}
+              text={isLoading ? "Czekaj..." : "Stwórz organizację"}
+            />
+            {isError && (
+              <p style={{ color: "red" }}>Błąd: {(error as Error)?.message}</p>
+            )}
           </form>
         </div>
         <div className="p-8">Twoje zaproszenia do organizacji</div>

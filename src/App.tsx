@@ -1,5 +1,5 @@
 import "./App.css";
-import Header from "./section/Headers.tsx";
+import Header from "./section/Header.tsx";
 import Page from "./section/Page.tsx";
 import Footer from "./section/Footer.tsx";
 import { UserContextProvider } from "./context/UserContext.tsx";
@@ -8,17 +8,15 @@ import { InterviewContextProvider } from "./context/InterviewContext.tsx";
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
-        <UserContextProvider>
-          <Header />
-          <InterviewContextProvider>
-            <Page />
-          </InterviewContextProvider>
-          <Footer />
-        </UserContextProvider>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <UserContextProvider>
+        <Header />
+        <InterviewContextProvider>
+          <Page />
+        </InterviewContextProvider>
+        <Footer />
+      </UserContextProvider>
+    </BrowserRouter>
   );
 }
 
