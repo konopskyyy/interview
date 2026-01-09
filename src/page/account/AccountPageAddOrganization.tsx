@@ -27,7 +27,7 @@ export default function AccountPageAddOrganization() {
   const isError = mutation.status === "error";
   const error = mutation.error;
 
-  function handleSubmitOrganizationCode() { }
+  function handleSubmitOrganizationCode() {}
 
   function handleSubmitCreateOrganization(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -43,10 +43,10 @@ export default function AccountPageAddOrganization() {
           apartmentNo: addressApartmentNo,
           city: addressCity,
           postalCode: addressPostalCode,
-          country: addressCountry
+          country: addressCountry,
         },
         recruiters: [],
-        candidates: []
+        candidates: [],
       },
       {
         onSuccess() {
