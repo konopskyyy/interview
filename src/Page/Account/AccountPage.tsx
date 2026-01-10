@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../context/UserContext";
+import { UserContext } from "../../context/UserContext.tsx";
 import { useNavigate } from "react-router";
 import AccountPageOrganizationData from "./AccountPageOrganizationData.tsx";
 import AccountPageAddOrganization from "./AccountPageAddOrganization.tsx";
