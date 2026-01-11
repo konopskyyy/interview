@@ -1,4 +1,4 @@
-import RemindMeForm from "../../component/remind-me/RemindMeForm.tsx";
+import RemindMeForm from "../../component/Remind-me/RemindMeForm.tsx";
 
 export default function RemindMePage() {
   return (
