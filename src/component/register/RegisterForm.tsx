@@ -41,15 +41,19 @@ export default function RegisterForm() {
 
   return (
     <form onSubmit={sendForm}>
-      <Input fieldName="name" fieldValue={name} setFieldValue={setName} />
       <Input
-        fieldName="password"
+        fieldName="Nazwa użytkownika"
+        fieldValue={name}
+        setFieldValue={setName}
+      />
+      <Input
+        fieldName="Hasło"
         type="password"
         fieldValue={password}
         setFieldValue={setPassword}
       />
       <Input
-        fieldName="retype-password"
+        fieldName="Powtórz hasło"
         type="password"
         fieldValue={retypedpassword}
         setFieldValue={setretypedpassword}
