@@ -8,6 +8,7 @@ export default function AccountPage() {
   const navigate = useNavigate();
   const context = useContext(UserContext);
   const [currentTab, setCurrentTab] = useState<string>("profile");
+
   const activeTab =
     "border-b-2 border-blue-600 px-4 py-2 text-sm font-medium text-blue-600 transition-colors hover:text-blue-700";
   const inactiveTab =
