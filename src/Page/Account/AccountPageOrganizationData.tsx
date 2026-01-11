@@ -1,57 +1,83 @@
+import DangerousButton from "../../component/UI/Form/DangerousButton.tsx";
+
 export default function AccountPageOrganizationData() {
   return (
     <>
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y-2 divide-gray-200">
-          <tbody className="divide-y divide-gray-200">
-            <tr className="*:text-gray-900 *:first:font-medium">
-              <td className="px-3 py-2 whitespace-nowrap"></td>
-              <td className="px-3 py-2 whitespace-nowrap">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/LEGO_logo.svg/512px-LEGO_logo.svg.png?20231016092137"
-                  className="w-50 h-50 rounded-full object-cover"
-                  alt="Logo firmy"
-                />{" "}
-              </td>
-            </tr>
+      <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+        <dl className="divide-y divide-gray-200">
+          <div className="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt className="text-sm font-medium text-gray-500 flex items-center">
+              Logo
+            </dt>
+            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/LEGO_logo.svg/512px-LEGO_logo.svg.png?20231016092137"
+                className="w-16 h-16 rounded-lg object-contain"
+                alt="Logo firmy"
+              />
+            </dd>
+          </div>
 
-            <tr className="*:text-gray-900 *:first:font-medium">
-              <td className="px-3 py-2 whitespace-nowrap">Nazwa firmy</td>
-              <td className="px-3 py-2 whitespace-nowrap">
-                W gorącej wodzie kompany
-              </td>
-            </tr>
+          <div className="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt className="text-sm font-medium text-gray-500">Nazwa firmy</dt>
+            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              W gorącej wodzie kompany
+            </dd>
+          </div>
 
-            <tr className="*:text-gray-900 *:first:font-medium">
-              <td className="px-3 py-2 whitespace-nowrap">Identyfikator</td>
-              <td className="px-3 py-2 whitespace-nowrap">6666</td>
-            </tr>
+          <div className="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt className="text-sm font-medium text-gray-500">Identyfikator</dt>
+            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              6666
+            </dd>
+          </div>
 
-            <tr className="*:text-gray-900 *:first:font-medium">
-              <td className="px-3 py-2 whitespace-nowrap">Adres</td>
-              <td className="px-3 py-2 whitespace-nowrap">Wiejska 10</td>
-            </tr>
+          <div className="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt className="text-sm font-medium text-gray-500">Adres</dt>
+            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              Wiejska 10
+            </dd>
+          </div>
 
-            <tr className="*:text-gray-900 *:first:font-medium">
-              <td className="px-3 py-2 whitespace-nowrap">Nip</td>
-              <td className="px-3 py-2 whitespace-nowrap">1234567890</td>
-            </tr>
+          <div className="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt className="text-sm font-medium text-gray-500">NIP</dt>
+            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              1234567890
+            </dd>
+          </div>
 
-            <tr className="*:text-gray-900 *:first:font-medium">
-              <td className="px-3 py-2 whitespace-nowrap">
-                Subskrypcja aktywna
-              </td>
-              <td className="px-3 py-2 whitespace-nowrap">Tak</td>
-            </tr>
+          <div className="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt className="text-sm font-medium text-gray-500">
+              Subskrypcja aktywna
+            </dt>
+            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                Tak
+              </span>
+            </dd>
+          </div>
 
-            <tr className="*:text-gray-900 *:first:font-medium">
-              <td className="px-3 py-2 whitespace-nowrap">
-                Termin subskrypcji
-              </td>
-              <td className="px-3 py-2 whitespace-nowrap">2025-11-11</td>
-            </tr>
-          </tbody>
-        </table>
+          <div className="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt className="text-sm font-medium text-gray-500">
+              Termin subskrypcji
+            </dt>
+            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              2025-11-11
+            </dd>
+          </div>
+        </dl>
+      </div>
+
+      <div className="mt-8 border-t border-gray-200 pt-8">
+        <h3 className="text-lg font-medium text-gray-900 mb-4">
+          Opuść organizację
+        </h3>
+        <div className="max-w-xs">
+          <DangerousButton
+            onClick={() => alert("Opuszczono organizację")}
+            text="Opuść organizację"
+          />
+        </div>
       </div>
     </>
   );

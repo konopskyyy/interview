@@ -21,29 +21,29 @@ export default function RemindMePage() {
 
           <div className="absolute top-0 right-0 h-full w-24 bg-gradient-to-l from-white/5 to-transparent -skew-x-12 blur-xl"></div>
         </div>
+      </div>
 
-        <div className="w-full lg:w-1/2 bg-white flex items-center justify-center p-8 lg:p-12 xl:p-24 relative z-20">
-          <div className="w-full max-w-md space-y-8">
-            <div className="text-center mb-10">
-              <h2 className="text-4xl font-black text-gray-900 tracking-tight mb-3">
-                Odzyskiwanie konta
-              </h2>
-              <p className="text-gray-500 text-lg">
-                Wpisz swój email, aby zresetować hasło
-              </p>
-            </div>
+      <div className="w-full lg:w-1/2 bg-white flex items-center justify-center p-8 lg:p-12 xl:p-24 relative z-20">
+        <div className="w-full max-w-md space-y-8">
+          <div className="text-center mb-10">
+            <h2 className="text-4xl font-black text-gray-900 tracking-tight mb-3">
+              Odzyskiwanie konta
+            </h2>
+            <p className="text-gray-500 text-lg">
+              Wpisz swój email, aby zresetować hasło
+            </p>
+          </div>
 
-            <RemindMeForm />
+          <RemindMeForm />
 
-            <div className="mt-8 pt-8 border-t border-gray-100 text-center text-sm text-gray-500">
-              Pamiętasz hasło?{" "}
-              <a
-                href="/login"
-                className="font-bold text-indigo-600 hover:text-indigo-500 transition-colors"
-              >
-                Zaloguj się
-              </a>
-            </div>
+          <div className="mt-8 pt-8 border-t border-gray-100 text-center text-sm text-gray-500">
+            Pamiętasz hasło?{" "}
+            <a
+              href="/login"
+              className="font-bold text-indigo-600 hover:text-indigo-500 transition-colors"
+            >
+              Zaloguj się
+            </a>
           </div>
         </div>
       </div>
