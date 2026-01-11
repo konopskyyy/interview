@@ -1,12 +1,12 @@
 import { Routes, Route, Outlet } from "react-router-dom"; // Dodano Outlet
-import RegisterForm from "../component/register/RegisterForm.tsx";
-import LoginForm from "../component/login/LoginForm.tsx";
-import RemindMeForm from "../component/remind-me/RemindMeForm.tsx";
+import RemindMePage from "../Page/Main/RemindMePage.tsx";
 import NotFound from "./NotFound.tsx";
 import AccountPage from "../Page/Account/AccountPage.tsx";
 import InterviewList from "../Page/Interview/InterviewList.tsx";
 import Interview from "../Page/Interview/Interview.tsx";
 import MainPage from "../Page/Main/Main.tsx";
+import RegisterPage from "../Page/Main/RegisterPage.tsx";
+import LoginPage from "../Page/Main/LoginPage.tsx";
 
 const StandardLayout = () => {
   return (
@@ -20,11 +20,10 @@ export default function Page() {
   return (
     <Routes>
       <Route path="/" element={<MainPage />} />
-
+      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/remind-me" element={<RemindMePage />} />
       <Route element={<StandardLayout />}>
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/register" element={<RegisterForm />} />
-        <Route path="/remind-me" element={<RemindMeForm />} />
         <Route path="/account" element={<AccountPage />} />
         <Route path="/interview-list" element={<InterviewList />} />
         <Route path="/interview/:id" element={<Interview />} />

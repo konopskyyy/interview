@@ -46,23 +46,24 @@ export default function LoginForm() {
 
   return (
     <form onSubmit={sendForm}>
-      <Input fieldName="name" fieldValue={name} setFieldValue={setName} />
       <Input
-        fieldName="password"
+        fieldName="Nazwa użytkownika"
+        fieldValue={name}
+        setFieldValue={setName}
+      />
+      <Input
+        fieldName="Hasło"
         type="password"
         fieldValue={password}
         setFieldValue={setPassword}
       />
       <SendFormButton
         disabled={isLoading}
-        text={isLoading ? "Logowanie..." : "Zaloguj"}
+        text={isLoading ? "Logowanie..." : "Zaloguj się"}
       />
       {isError && (
         <p style={{ color: "red" }}>Błąd: {(error as Error)?.message}</p>
       )}
-      <h5>
-        nie pamiętasz hasła? <a href="remind-me">przypomij</a>
-      </h5>
     </form>
   );
 }
