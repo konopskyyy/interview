@@ -94,7 +94,7 @@ export default function LoggedUserHeader({
                     logout();
                     closeMenu();
                   }}
-                  className="text-gray-300 text-lg hover:text-white transition-colors cursor-pointer"
+                  className="text-left text-gray-300 text-lg hover:text-white transition-colors cursor-pointer"
                 >
                   Wyloguj
                 </button>
