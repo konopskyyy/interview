@@ -60,7 +60,7 @@ export default function RegisterForm() {
       />
       <SendFormButton
         disabled={isLoading}
-        text={isLoading ? "Rejestrowanue..." : "Rejestruj"}
+        text={isLoading ? "Rejestrowanie..." : "Rejestruj"}
       />
       {isError && (
         <p style={{ color: "red" }}>Błąd: {(error as Error)?.message}</p>

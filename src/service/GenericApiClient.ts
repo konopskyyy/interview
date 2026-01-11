@@ -16,7 +16,7 @@ export function post(url: string, body: object, errorMessage: string) {
   });
 }
 
-export function delete (url: string, errorMessage: string) {
+export function remove(url: string, errorMessage: string) {
   return fetch(url, {
     method: "DELETE",
     headers: {
