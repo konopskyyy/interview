@@ -10,11 +10,15 @@ function App() {
   return (
     <BrowserRouter>
       <UserContextProvider>
-        <Header />
-        <InterviewContextProvider>
-          <Page />
-        </InterviewContextProvider>
-        <Footer />
+        <div className="flex flex-col min-h-screen bg-gray-950 text-white">
+          <Header />
+          <InterviewContextProvider>
+            <main className="flex-grow pt-14">
+              <Page />
+            </main>
+          </InterviewContextProvider>
+          <Footer />
+        </div>
       </UserContextProvider>
     </BrowserRouter>
   );
