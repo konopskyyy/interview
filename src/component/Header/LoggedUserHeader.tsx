@@ -67,25 +67,25 @@ export default function LoggedUserHeader({
             </button>
 
             {isOpen && (
-              <div className="absolute top-14 left-0 w-full bg-gray-900 border-b border-gray-800 shadow-xl flex flex-col p-6 space-y-4">
+              <div className="absolute top-14 left-0 w-full bg-gray-900 border-b border-gray-800 shadow-xl flex flex-col p-6 space-y-4 items-center">
                 <NavLink
                   to="/"
                   onClick={closeMenu}
-                  className="text-gray-300 text-lg hover:text-white transition-colors"
+                  className="text-gray-300 text-lg hover:text-white transition-colors w-full text-center py-2"
                 >
                   Strona główna
                 </NavLink>
                 <NavLink
                   to="/interview-list"
                   onClick={closeMenu}
-                  className="text-gray-300 text-lg hover:text-white transition-colors"
+                  className="text-gray-300 text-lg hover:text-white transition-colors w-full text-center py-2"
                 >
                   Aplikacja
                 </NavLink>
                 <NavLink
                   to="/account"
                   onClick={closeMenu}
-                  className="text-gray-300 text-lg hover:text-white transition-colors"
+                  className="text-gray-300 text-lg hover:text-white transition-colors w-full text-center py-2"
                 >
                   {username}
                 </NavLink>
@@ -94,7 +94,7 @@ export default function LoggedUserHeader({
                     logout();
                     closeMenu();
                   }}
-                  className="text-left text-gray-300 text-lg hover:text-white transition-colors cursor-pointer"
+                  className="text-gray-300 text-lg hover:text-white transition-colors cursor-pointer w-full text-center py-2"
                 >
                   Wyloguj
                 </button>
@@ -102,23 +102,32 @@ export default function LoggedUserHeader({
             )}
           </>
         ) : (
-          <ul className="flex space-x-10 text-gray-300 text-lg">
+          <ul className="flex space-x-2 text-gray-300 text-lg ml-auto items-center">
             <li>
-              <NavLink to="/" className="hover:text-white">
+              <NavLink to="/" className="hover:text-white px-4 py-2 block">
                 Strona główna
               </NavLink>
             </li>
             <li>
-              <NavLink to="/interview-list" className="hover:text-white">
+              <NavLink
+                to="/interview-list"
+                className="hover:text-white px-4 py-2 block"
+              >
                 Aplikacja
               </NavLink>
             </li>
             <li>
-              <NavLink to="/account" className="hover:text-white">
+              <NavLink
+                to="/account"
+                className="hover:text-white px-4 py-2 block"
+              >
                 {username}
               </NavLink>
             </li>
-            <li onClick={logout} className="hover:text-white cursor-pointer">
+            <li
+              onClick={logout}
+              className="hover:text-white cursor-pointer px-4 py-2 block"
+            >
               Wyloguj
             </li>
           </ul>

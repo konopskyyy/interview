@@ -162,6 +162,7 @@ export default function Features() {
 
   return (
     <section
+      id="features"
       ref={sectionRef}
       className="relative w-screen left-[calc(-50vw+50%)] bg-white py-24 lg:py-32 overflow-hidden"
     >
@@ -194,13 +195,13 @@ export default function Features() {
               className={`group p-8 rounded-3xl bg-gray-50 border border-gray-100 hover:border-indigo-100 hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 hover:-translate-y-2 transform ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"}`}
               style={{ transitionDelay: `${feature.delay + 300}ms` }}
             >
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center mb-8 shadow-lg shadow-indigo-500/30 group-hover:scale-110 transition-transform duration-300">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center mb-8 shadow-lg shadow-indigo-500/30 group-hover:scale-110 transition-transform duration-300 mx-auto">
                 {feature.icon}
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-indigo-600 transition-colors">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-indigo-600 transition-colors text-center">
                 {feature.title}
               </h3>
-              <p className="text-gray-500 leading-relaxed">
+              <p className="text-gray-500 leading-relaxed text-center">
                 {feature.description}
               </p>
             </div>
