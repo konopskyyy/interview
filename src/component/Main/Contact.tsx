@@ -16,7 +16,10 @@ export default function Contact() {
   };
 
   return (
-    <section className="relative w-screen left-[calc(-50vw+50%)] bg-gray-900 text-white py-24 lg:py-32 overflow-hidden">
+    <section
+      id="contact"
+      className="relative w-screen left-[calc(-50vw+50%)] bg-white text-gray-900 py-24 lg:py-32 overflow-hidden"
+    >
       {/* Background Effects matching Hero */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-20 right-0 w-[500px] h-[500px] bg-indigo-600 rounded-full mix-blend-multiply filter blur-[128px] opacity-10 animate-pulse"></div>
@@ -27,9 +30,9 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 xl:gap-24">
           {/* Contact Info Column */}
           <div className="flex flex-col justify-center">
-            <div className="inline-flex self-start items-center px-4 py-2 rounded-full border border-gray-700 bg-gray-800/50 mb-8 backdrop-blur-sm">
+            <div className="inline-flex self-start items-center px-4 py-2 rounded-full border border-indigo-100 bg-indigo-50/50 mb-8 backdrop-blur-sm">
               <span className="w-3 h-3 rounded-full bg-indigo-500 mr-3 animate-pulse"></span>
-              <span className="text-sm font-bold text-gray-300 uppercase tracking-widest">
+              <span className="text-sm font-bold text-indigo-600 uppercase tracking-widest">
                 Kontakt
               </span>
             </div>
@@ -41,7 +44,7 @@ export default function Contact() {
               </span>
             </h2>
 
-            <p className="text-xl text-gray-400 mb-12 max-w-lg leading-relaxed">
+            <p className="text-xl text-gray-600 mb-12 max-w-lg leading-relaxed">
               Jesteśmy tu, aby pomóc Ci zrewolucjonizować proces rekrutacji w
               Twojej firmie.
             </p>
@@ -49,9 +52,9 @@ export default function Contact() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
               <a
                 href="mailto:kontakt@interview.pl"
-                className="group flex items-center p-5 rounded-2xl bg-gray-800/30 border border-gray-700/50 hover:bg-gray-800/80 hover:border-indigo-500/30 transition-all duration-300"
+                className="group flex items-center p-5 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-lg hover:border-indigo-100 transition-all duration-300"
               >
-                <div className="w-12 h-12 rounded-xl bg-indigo-500/10 flex items-center justify-center text-indigo-400 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 mr-4 shrink-0">
+                <div className="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-500 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 mr-4 shrink-0">
                   <svg
                     className="w-6 h-6"
                     fill="none"
@@ -67,10 +70,10 @@ export default function Contact() {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-400 font-medium mb-0.5">
+                  <p className="text-sm text-gray-500 font-medium mb-0.5">
                     Napisz do nas
                   </p>
-                  <p className="text-lg font-bold text-white group-hover:text-indigo-400 transition-colors">
+                  <p className="text-lg font-bold text-gray-900 group-hover:text-indigo-600 transition-colors">
                     kontakt@interview.pl
                   </p>
                 </div>
@@ -78,9 +81,9 @@ export default function Contact() {
 
               <a
                 href="tel:+48536123987"
-                className="group flex items-center p-5 rounded-2xl bg-gray-800/30 border border-gray-700/50 hover:bg-gray-800/80 hover:border-indigo-500/30 transition-all duration-300"
+                className="group flex items-center p-5 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-lg hover:border-indigo-100 transition-all duration-300"
               >
-                <div className="w-12 h-12 rounded-xl bg-indigo-500/10 flex items-center justify-center text-indigo-400 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 mr-4 shrink-0">
+                <div className="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-500 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 mr-4 shrink-0">
                   <svg
                     className="w-6 h-6"
                     fill="none"
@@ -96,61 +99,27 @@ export default function Contact() {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-400 font-medium mb-0.5">
+                  <p className="text-sm text-gray-500 font-medium mb-0.5">
                     Zadzwoń teraz
                   </p>
-                  <p className="text-lg font-bold text-white group-hover:text-indigo-400 transition-colors">
+                  <p className="text-lg font-bold text-gray-900 group-hover:text-indigo-600 transition-colors">
                     +48 536 123 987
                   </p>
                 </div>
               </a>
-
-              <div className="group flex items-center p-5 rounded-2xl bg-gray-800/30 border border-gray-700/50 hover:bg-gray-800/80 hover:border-indigo-500/30 transition-all duration-300">
-                <div className="w-12 h-12 rounded-xl bg-indigo-500/10 flex items-center justify-center text-indigo-400 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 mr-4 shrink-0">
-                  <svg
-                    className="w-6 h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-400 font-medium mb-0.5">
-                    Odwiedź biuro
-                  </p>
-                  <p className="text-lg font-bold text-white leading-tight">
-                    ul. Technologiczna 12/4,
-                    <br />
-                    00-001 Warszawa
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
 
           {/* Contact Form Column */}
-          <div className="bg-gray-800/50 backdrop-blur-xl p-8 md:p-10 rounded-3xl border border-gray-700 shadow-xl">
-            <h3 className="text-2xl font-bold text-white mb-6">
+          <div className="bg-white p-8 md:p-10 rounded-3xl border border-gray-100 shadow-xl">
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">
               Napisz do nas
             </h3>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium text-gray-400 mb-2"
+                  className="block text-sm font-medium text-gray-700 mb-2"
                 >
                   Imię i nazwisko
                 </label>
@@ -162,7 +131,7 @@ export default function Contact() {
                   onChange={(e) =>
                     setFormState({ ...formState, name: e.target.value })
                   }
-                  className="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
+                  className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
                   placeholder="Jan Kowalski"
                 />
               </div>
@@ -170,7 +139,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-400 mb-2"
+                  className="block text-sm font-medium text-gray-700 mb-2"
                 >
                   Adres email
                 </label>
@@ -182,7 +151,7 @@ export default function Contact() {
                   onChange={(e) =>
                     setFormState({ ...formState, email: e.target.value })
                   }
-                  className="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
+                  className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
                   placeholder="jan@firma.pl"
                 />
               </div>
@@ -190,7 +159,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-sm font-medium text-gray-400 mb-2"
+                  className="block text-sm font-medium text-gray-700 mb-2"
                 >
                   Wiadomość
                 </label>
@@ -202,7 +171,7 @@ export default function Contact() {
                   onChange={(e) =>
                     setFormState({ ...formState, message: e.target.value })
                   }
-                  className="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors resize-none"
+                  className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors resize-none"
                   placeholder="O co chcesz zapytać?"
                 ></textarea>
               </div>
