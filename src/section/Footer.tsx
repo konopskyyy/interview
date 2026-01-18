@@ -19,7 +19,7 @@ export default function Footer() {
               <div className="flex">
                 <input
                   type="email"
-                  placeholder="Twoje e-mail"
+                  placeholder="Twój e-mail"
                   className="bg-gray-800 border border-gray-700 text-white px-4 py-2 rounded-l-md focus:outline-none focus:ring-1 focus:ring-blue-500 w-full"
                   required
                 />

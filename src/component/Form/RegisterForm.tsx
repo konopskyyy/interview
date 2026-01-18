@@ -1,9 +1,9 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
-import Input from "../../UI/Form/Input.tsx";
-import SendFormButton from "../../UI/Form/SendFormButton.tsx";
 import { useMutation } from "@tanstack/react-query";
-import { userRegister } from "../../../service/QuestionApiClient.ts";
+import { userRegister } from "../../service/QuestionApiClient";
+import Input from "../UI/Form/Input.tsx";
+import SendFormButton from "../UI/Form/SendFormButton.tsx";
 
 export default function RegisterForm() {
   const [name, setName] = useState<string>("");

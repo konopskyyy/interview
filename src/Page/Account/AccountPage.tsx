@@ -3,8 +3,8 @@ import { UserContext } from "../../context/UserContext.tsx";
 import { useNavigate } from "react-router";
 import AccountPageOrganizationData from "./AccountPageOrganizationData.tsx";
 import AccountPageAddOrganization from "./AccountPageAddOrganization.tsx";
-import ChangePasswordForm from "../../component/User/ChangePassword/ChangePasswordForm.tsx";
-import RemoveAccountForm from "../../component/User/Remove/RemoveAccountForm.tsx";
+import RemoveAccountForm from "../../component/Form/RemoveAccountForm.tsx";
+import ChangePasswordForm from "../../component/Form/ChangePasswordForm.tsx";
 
 export default function AccountPage() {
   const navigate = useNavigate();
@@ -27,56 +27,58 @@ export default function AccountPage() {
 
   return (
     <>
-      <div className="-mb-px border-b border-gray-200">
-        <div role="tablist" className="flex gap-1">
-          <button
-            onClick={() => setCurrentTab("profile")}
-            role="tab"
-            aria-selected={currentTab == "profile"}
-            className={currentTab == "profile" ? activeTab : inactiveTab}
-          >
-            Profile
-          </button>
+      <div className="bg-white p-6 rounded-lg shadow-xl text-gray-900">
+        <div className="-mb-px border-b border-gray-200">
+          <div role="tablist" className="flex gap-1">
+            <button
+              onClick={() => setCurrentTab("profile")}
+              role="tab"
+              aria-selected={currentTab == "profile"}
+              className={currentTab == "profile" ? activeTab : inactiveTab}
+            >
+              Profile
+            </button>
 
-          <button
-            onClick={() => setCurrentTab("organization")}
-            role="tab"
-            aria-selected={currentTab == "organization"}
-            className={currentTab == "organization" ? activeTab : inactiveTab}
-          >
-            Organization
-          </button>
+            <button
+              onClick={() => setCurrentTab("organization")}
+              role="tab"
+              aria-selected={currentTab == "organization"}
+              className={currentTab == "organization" ? activeTab : inactiveTab}
+            >
+              Organization
+            </button>
+          </div>
         </div>
-      </div>
 
-      <div role="tabpanel" className="mt-4">
-        <p className="text-gray-700">
-          {currentTab == "profile" && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <fieldset className="border border-gray-300 p-4 rounded-md h-full flex flex-col">
-                  <legend className="px-2 text-gray-700">Dane osobowe</legend>
-                  <p className="text-gray-600 mb-4">
-                    <span className="font-medium text-gray-800">E-mail:</span>{" "}
-                    {context.user.username}
-                  </p>
-                  <RemoveAccountForm />
-                </fieldset>
+        <div role="tabpanel" className="mt-4">
+          <div className="text-gray-700">
+            {currentTab == "profile" && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <fieldset className="border border-gray-300 p-4 rounded-md h-full flex flex-col">
+                    <legend className="px-2 text-gray-700">Dane osobowe</legend>
+                    <p className="text-gray-600 mb-4">
+                      <span className="font-medium text-gray-800">E-mail:</span>{" "}
+                      {context.user.username}
+                    </p>
+                    <RemoveAccountForm />
+                  </fieldset>
+                </div>
+                <div>
+                  <ChangePasswordForm />
+                </div>
               </div>
-              <div>
-                <ChangePasswordForm />
-              </div>
-            </div>
-          )}
+            )}
 
-          {currentTab == "organization" && !context.getOrganizationId() && (
-            <AccountPageAddOrganization />
-          )}
+            {currentTab == "organization" && !context.getOrganizationId() && (
+              <AccountPageAddOrganization />
+            )}
 
-          {currentTab == "organization" && context.getOrganizationId() && (
-            <AccountPageOrganizationData />
-          )}
-        </p>
+            {currentTab == "organization" && context.getOrganizationId() && (
+              <AccountPageOrganizationData />
+            )}
+          </div>
+        </div>
       </div>
     </>
   );

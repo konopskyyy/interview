@@ -27,7 +27,7 @@ export default function BaseModal({ children, title }: BaseModalProps) {
           onClick={closeModal} // kliknięcie poza modal zamyka
         >
           <div
-            className="bg-white rounded-lg shadow-lg p-6 max-w-lg w-full max-h-[75vh] overflow-y-auto"
+            className="bg-white rounded-lg shadow-lg p-6 max-w-lg w-full max-h-[75vh] overflow-y-auto text-gray-900"
             onClick={(e) => e.stopPropagation()} // zapobiega zamknięciu po kliknięciu w treść
           >
             {children}

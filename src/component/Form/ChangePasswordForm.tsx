@@ -1,9 +1,9 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import { useMutation } from "@tanstack/react-query";
-import Input from "../../UI/Form/Input.tsx";
-import SendFormButton from "../../UI/Form/SendFormButton.tsx";
-import { changeUserPassword } from "../../../service/QuestionApiClient.ts";
+import Input from "../UI/Form/Input.tsx";
+import SendFormButton from "../UI/Form/SendFormButton.tsx";
+import { changeUserPassword } from "../../service/QuestionApiClient.ts";
 
 export default function ChangePasswordForm() {
   const [currentPassword, setCurrentPassword] = useState("");
