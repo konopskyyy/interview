@@ -2,10 +2,10 @@ import { useState, useContext } from "react";
 import type { FormEvent } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
-import { UserContext } from "../../../context/UserContext.tsx";
-import Input from "../../UI/Form/Input.tsx";
-import SendFormButton from "../../UI/Form/SendFormButton.tsx";
-import { userLogin } from "../../../service/QuestionApiClient.ts";
+import { UserContext } from "../../context/UserContext.tsx";
+import Input from "../UI/Form/Input.tsx";
+import SendFormButton from "../UI/Form/SendFormButton.tsx";
+import { userLogin } from "../../service/QuestionApiClient.ts";
 
 export default function LoginForm() {
   const [name, setName] = useState("");

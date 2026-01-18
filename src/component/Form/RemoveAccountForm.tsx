@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import type { FormEvent } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { UserContext } from "../../../context/UserContext.tsx";
-import { removeUser } from "../../../service/QuestionApiClient.ts";
-import DangerousButton from "../../UI/Form/DangerousButton.tsx";
+import { UserContext } from "../../context/UserContext.tsx";
+import { removeUser } from "../../service/QuestionApiClient.ts";
+import DangerousButton from "../UI/Form/DangerousButton.tsx";
 
 export default function RemoveAccountForm() {
   const context = useContext(UserContext);

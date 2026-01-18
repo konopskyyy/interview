@@ -10,8 +10,10 @@ import LoginPage from "../Page/Main/LoginPage.tsx";
 
 const StandardLayout = () => {
   return (
-    <div className="p-4 sm:p-8 max-w-7xl mx-auto">
-      <Outlet />
+    <div className="w-full min-h-[calc(100vh-56px)] text-gray-900 bg-gray-50">
+      <div className="p-4 sm:p-8 max-w-7xl mx-auto">
+        <Outlet />
+      </div>
     </div>
   );
 };

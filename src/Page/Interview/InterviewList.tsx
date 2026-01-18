@@ -15,7 +15,7 @@ export default function InterviewList() {
   const interviews = context.interviews;
 
   return (
-    <>
+    <div className="bg-white p-6 rounded-lg shadow-xl text-gray-900">
       <AddInterviewModal />
       <AccordionParent title="Rekrutacje rozpoczęte">
         {interviews.map((interview) => {
@@ -38,6 +38,6 @@ export default function InterviewList() {
         {/*  <InterviewQuickInfo />*/}
         {/*</AccordionChild>*/}
       </AccordionParent>
-    </>
+    </div>
   );
 }
