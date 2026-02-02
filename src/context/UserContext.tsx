@@ -13,6 +13,7 @@ interface UserContextInterface {
   user: UserInterface | null;
   isLogged: () => boolean;
   getUsername: () => string;
+  getUserId: () => string;
   getOrganizationId: () => string;
   login: (token: string) => void;
   logout: () => void;
@@ -49,6 +50,10 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
     return user?.username || "";
   }
 
+  function getUserId(): string {
+    return user?.userId || "";
+  }
+
   function getOrganizationId(): string {
     return user?.organizationId || "";
   }
@@ -72,7 +77,7 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
 
   return (
     <UserContext.Provider
-      value={{ user, isLogged, getUsername, getOrganizationId, login, logout }}
+      value={{ user, isLogged, getUsername, getUserId, getOrganizationId, login, logout }}
     >
       {children}
     </UserContext.Provider>

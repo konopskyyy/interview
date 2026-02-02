@@ -1,6 +1,7 @@
 import DangerousButton from "../../component/UI/Form/DangerousButton.tsx";
+import LeaveOrganisationForm from "../../component/Form/LeaveOrganisationForm.tsx";
 
-export default function AccountPageOrganizationData() {
+export default function AccountPageOrganizationData({organizationId, recruiterId}) {
   return (
     <>
       <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
@@ -72,12 +73,7 @@ export default function AccountPageOrganizationData() {
         <h3 className="text-lg font-medium text-gray-900 mb-4">
           Opuść organizację
         </h3>
-        <div className="max-w-xs">
-          <DangerousButton
-            onClick={() => alert("Opuszczono organizację")}
-            text="Opuść organizację"
-          />
-        </div>
+            <LeaveOrganisationForm organizationId = {organizationId} recruiterId={recruiterId} />
       </div>
     </>
   );
