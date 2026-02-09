@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 
 interface UserInterface {
   username: string;
+  userId: string;
   organizationId: string;
 }
 
@@ -77,7 +78,15 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
 
   return (
     <UserContext.Provider
-      value={{ user, isLogged, getUsername, getUserId, getOrganizationId, login, logout }}
+      value={{
+        user,
+        isLogged,
+        getUsername,
+        getUserId,
+        getOrganizationId,
+        login,
+        logout,
+      }}
     >
       {children}
     </UserContext.Provider>

@@ -75,7 +75,10 @@ export default function AccountPage() {
             )}
 
             {currentTab == "organization" && context.getOrganizationId() && (
-              <AccountPageOrganizationData organizationId = {context.getOrganizationId()} recruiterId={context.getUserId()} />
+              <AccountPageOrganizationData
+                organizationId={context.getOrganizationId()}
+                recruiterId={context.getUserId()}
+              />
             )}
           </div>
         </div>
