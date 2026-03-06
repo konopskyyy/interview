@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router";
+import { NavLink, useLocation } from "react-router";
 import Logo from "../UI/Logo.tsx";
 import { useIsMobile } from "../../hooks/useIsMobile.ts";
 
@@ -13,6 +13,7 @@ export default function LoggedUserHeader({
   logout,
 }: LoggedUserHeaderProps) {
   const isMobile = useIsMobile();
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
 
   function toggleMenu() {
@@ -70,7 +71,13 @@ export default function LoggedUserHeader({
               <div className="absolute top-14 left-0 w-full bg-gray-900 border-b border-gray-800 shadow-xl flex flex-col p-6 space-y-4 items-center">
                 <NavLink
                   to="/"
-                  onClick={closeMenu}
+                  onClick={(e) => {
+                    if (location.pathname === "/") {
+                      e.preventDefault();
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }
+                    closeMenu();
+                  }}
                   className="text-gray-300 text-lg hover:text-white transition-colors w-full text-center py-2"
                 >
                   Strona główna
@@ -104,7 +111,16 @@ export default function LoggedUserHeader({
         ) : (
           <ul className="flex space-x-2 text-gray-300 text-lg ml-auto items-center">
             <li>
-              <NavLink to="/" className="hover:text-white px-4 py-2 block">
+              <NavLink
+                to="/"
+                onClick={(e) => {
+                  if (location.pathname === "/") {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }
+                }}
+                className="hover:text-white px-4 py-2 block"
+              >
                 Strona główna
               </NavLink>
             </li>

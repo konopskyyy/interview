@@ -2,16 +2,16 @@ import { useState, useContext } from "react";
 import type { FormEvent } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
-import { UserContext } from "../../context/UserContext.tsx";
+import { AuthContext } from "../../context/AuthContext.tsx";
 import Input from "../UI/Form/Input.tsx";
 import SendFormButton from "../UI/Form/SendFormButton.tsx";
-import { userLogin } from "../../service/QuestionApiClient.ts";
+import { userLogin } from "../../service/UserApiClient.ts";
 
 export default function LoginForm() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const context = useContext(UserContext);
+  const authContext = useContext(AuthContext);
 
   const mutation = useMutation({
     mutationKey: ["login"],
@@ -23,10 +23,10 @@ export default function LoginForm() {
   const isError = mutation.status === "error";
   const error = mutation.error;
 
-  if (!context) {
+  if (!authContext) {
     return null;
   }
-  const { login } = context;
+  const { login } = authContext;
 
   function sendForm(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();

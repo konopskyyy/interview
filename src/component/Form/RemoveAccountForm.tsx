@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import type { FormEvent } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { UserContext } from "../../context/UserContext.tsx";
-import { removeUser } from "../../service/QuestionApiClient.ts";
+import { AuthContext } from "../../context/AuthContext.tsx";
+import { removeUser } from "../../service/UserApiClient.ts";
 import DangerousButton from "../UI/Form/DangerousButton.tsx";
 
 export default function RemoveAccountForm() {
-  const context = useContext(UserContext);
+  const authContext = useContext(AuthContext);
 
   const mutation = useMutation({
     mutationKey: ["deleteUser"],
@@ -27,8 +27,8 @@ export default function RemoveAccountForm() {
     mutation.mutate(undefined, {
       onSuccess() {
         alert("Konto zostało usunięte.");
-        if (context) {
-          context.logout();
+        if (authContext) {
+          authContext.logout();
         }
       },
       onError(error) {

@@ -1,16 +1,19 @@
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext.tsx";
+import { AuthContext } from "../context/AuthContext.tsx";
 import LoggedUserHeader from "../component/Header/LoggedUserHeader.tsx";
 import AnonymousUserHeader from "../component/Header/AnonymousUserHeader.tsx";
 
 export default function Header() {
-  const context = useContext(UserContext);
+  const userContext = useContext(UserContext);
+  const authContext = useContext(AuthContext);
 
-  if (!context) return <h5>Brak kontekstu użytkownika</h5>;
+  if (!authContext || !userContext) return <h5>Brak kontekstu użytkownika</h5>;
 
-  const { isLogged, getUsername, logout } = context;
+  const { isAuthenticated, logout } = authContext;
+  const { getUsername } = userContext;
 
-  return isLogged() ? (
+  return isAuthenticated ? (
     <LoggedUserHeader username={getUsername()} logout={logout} />
   ) : (
     <AnonymousUserHeader />

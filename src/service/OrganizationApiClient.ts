@@ -1,4 +1,4 @@
-import { post, remove } from "./GenericApiClient.ts";
+import { post, remove, get } from "./GenericApiClient.ts";
 
 const BASE_URL = "https://questions.tojest.dev/api/";
 export type organizationBody = {
@@ -19,6 +19,10 @@ export type organizationBody = {
 
 export function createOrganization(organization: organizationBody) {
   return post(BASE_URL + "organization", organization, "Błąd tworzenia");
+}
+
+export function getOrganization(organizationId: string) {
+  return get(BASE_URL + "organization/" + organizationId, "Błąd pobierania");
 }
 
 export function leaveOrganization(organizationId: string, recruiterId: string) {

@@ -1,4 +1,20 @@
+import { useNavigate, useLocation } from "react-router";
+
 export default function Hero() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const scrollToSection = (id: string) => {
+    if (location.pathname !== "/") {
+      navigate(`/#${id}`);
+    } else {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
   return (
     <section className="relative w-screen left-[calc(-50vw+50%)] bg-gray-900 text-white overflow-hidden min-h-screen flex items-center">
       <div className="absolute top-0 left-1/2 w-full -translate-x-1/2 h-full z-0 pointer-events-none">
@@ -30,10 +46,16 @@ export default function Hero() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6">
-              <button className="px-10 py-5 text-lg font-bold text-white bg-indigo-600 rounded-2xl hover:bg-indigo-500 transition-all shadow-xl shadow-indigo-600/20 hover:scale-105 active:scale-95">
+              <button
+                onClick={() => navigate("/register")}
+                className="px-10 py-5 text-lg font-bold text-white bg-indigo-600 rounded-2xl hover:bg-indigo-500 transition-all shadow-xl shadow-indigo-600/20 hover:scale-105 active:scale-95"
+              >
                 Rozpocznij ocenianie
               </button>
-              <button className="px-10 py-5 text-lg font-bold text-gray-300 bg-gray-800/50 border border-gray-600 rounded-2xl hover:bg-gray-700 transition-all hover:scale-105">
+              <button
+                onClick={() => scrollToSection("demo")}
+                className="px-10 py-5 text-lg font-bold text-gray-300 bg-gray-800/50 border border-gray-600 rounded-2xl hover:bg-gray-700 transition-all hover:scale-105"
+              >
                 Zobacz demo
               </button>
             </div>
