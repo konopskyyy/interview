@@ -1,8 +1,15 @@
 /* eslint-disable react-refresh/only-export-components */
 
-import { createContext, useState, useEffect } from "react";
+import {
+  createContext,
+  useState,
+  useEffect,
+  useContext,
+  useMemo,
+  useCallback,
+} from "react";
 import type { ReactNode } from "react";
-import { useNavigate } from "react-router";
+import { AuthContext } from "./AuthContext.tsx";
 
 interface UserInterface {
   username: string;
@@ -12,12 +19,8 @@ interface UserInterface {
 
 interface UserContextInterface {
   user: UserInterface | null;
-  isLogged: () => boolean;
   getUsername: () => string;
   getUserId: () => string;
-  getOrganizationId: () => string;
-  login: (token: string) => void;
-  logout: () => void;
 }
 
 interface UserContextProviderProps {
@@ -26,40 +29,8 @@ interface UserContextProviderProps {
 
 export const UserContext = createContext<UserContextInterface | null>(null);
 
-export function UserContextProvider({ children }: UserContextProviderProps) {
-  const [user, setUser] = useState<UserInterface | null>(null);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const token = sessionStorage.getItem("user_token");
-    if (token) {
-      setUser(decode(token));
-    }
-  }, []);
-
-  function isLogged(): boolean {
-    return user !== null;
-  }
-
-  function logout(): void {
-    sessionStorage.removeItem("user_token");
-    setUser(null);
-    navigate("/");
-  }
-
-  function getUsername(): string {
-    return user?.username || "";
-  }
-
-  function getUserId(): string {
-    return user?.userId || "";
-  }
-
-  function getOrganizationId(): string {
-    return user?.organizationId || "";
-  }
-
-  function decode(token: string): UserInterface {
+function decode(token: string): UserInterface | null {
+  try {
     const payloadBase64 = token.split(".")[1];
     const base64 = payloadBase64.replace(/-/g, "+").replace(/_/g, "/");
     const jsonPayload = decodeURIComponent(
@@ -69,26 +40,47 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
         .join(""),
     );
     return JSON.parse(jsonPayload);
+  } catch (error) {
+    console.error("Failed to decode token", error);
+    return null;
   }
+}
 
-  function login(token: string) {
-    sessionStorage.setItem("user_token", token);
-    setUser(decode(token));
-  }
+export function UserContextProvider({ children }: UserContextProviderProps) {
+  const authContext = useContext(AuthContext);
+  const token = authContext?.token;
+
+  const [user, setUser] = useState<UserInterface | null>(() => {
+    return token ? decode(token) : null;
+  });
+
+  useEffect(() => {
+    if (token) {
+      const decodedUser = decode(token);
+      setUser(decodedUser);
+    } else {
+      setUser(null);
+    }
+  }, [token]);
+
+  const getUsername = useCallback((): string => {
+    return user?.username || "";
+  }, [user]);
+
+  const getUserId = useCallback((): string => {
+    return user?.userId || "";
+  }, [user]);
+
+  const contextValue = useMemo(
+    () => ({
+      user,
+      getUsername,
+      getUserId,
+    }),
+    [user, getUsername, getUserId],
+  );
 
   return (
-    <UserContext.Provider
-      value={{
-        user,
-        isLogged,
-        getUsername,
-        getUserId,
-        getOrganizationId,
-        login,
-        logout,
-      }}
-    >
-      {children}
-    </UserContext.Provider>
+    <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
   );
 }

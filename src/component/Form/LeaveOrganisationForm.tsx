@@ -1,6 +1,8 @@
 import DangerousButton from "../UI/Form/DangerousButton.tsx";
 import { leaveOrganization } from "../../service/OrganizationApiClient.ts";
 import { useMutation } from "@tanstack/react-query";
+import { useContext } from "react";
+import { OrganizationContext } from "../../context/OrganizationContext.tsx";
 
 interface Props {
   organizationId: string;
@@ -11,6 +13,8 @@ export default function LeaveOrganisationForm({
   organizationId,
   recruiterId,
 }: Props) {
+  const orgContext = useContext(OrganizationContext);
+
   const mutation = useMutation({
     mutationKey: ["leaveOrganization"],
     mutationFn: () => leaveOrganization(organizationId, recruiterId),
@@ -19,7 +23,10 @@ export default function LeaveOrganisationForm({
   function sendForm() {
     mutation.mutate(undefined, {
       onSuccess() {
-        alert("sukces");
+        if (orgContext) {
+          orgContext.leaveOrganization();
+        }
+        window.location.reload();
       },
       onError(error) {
         alert((error as Error).message);

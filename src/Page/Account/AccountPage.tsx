@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/UserContext.tsx";
+import { AuthContext } from "../../context/AuthContext.tsx";
+import { OrganizationContext } from "../../context/OrganizationContext.tsx";
 import { useNavigate } from "react-router";
 import AccountPageOrganizationData from "./AccountPageOrganizationData.tsx";
 import AccountPageAddOrganization from "./AccountPageAddOrganization.tsx";
@@ -9,6 +11,8 @@ import ChangePasswordForm from "../../component/Form/ChangePasswordForm.tsx";
 export default function AccountPage() {
   const navigate = useNavigate();
   const context = useContext(UserContext);
+  const authContext = useContext(AuthContext);
+  const orgContext = useContext(OrganizationContext);
   const [currentTab, setCurrentTab] = useState<string>("profile");
 
   const activeTab =
@@ -16,12 +20,12 @@ export default function AccountPage() {
   const inactiveTab =
     "border-b-2 border-transparent px-4 py-2 text-sm font-medium text-gray-600 transition-colors hover:text-gray-700";
   useEffect(() => {
-    if (!context || !context.user) {
+    if (!authContext?.isAuthenticated) {
       navigate("/");
     }
-  }, [context, navigate]);
+  }, [authContext, navigate]);
 
-  if (!context || !context.user) {
+  if (!authContext?.isAuthenticated || !context?.user) {
     return null;
   }
 
@@ -70,16 +74,18 @@ export default function AccountPage() {
               </div>
             )}
 
-            {currentTab == "organization" && !context.getOrganizationId() && (
-              <AccountPageAddOrganization />
-            )}
+            {currentTab == "organization" &&
+              !orgContext?.getOrganizationId() && (
+                <AccountPageAddOrganization />
+              )}
 
-            {currentTab == "organization" && context.getOrganizationId() && (
-              <AccountPageOrganizationData
-                organizationId={context.getOrganizationId()}
-                recruiterId={context.getUserId()}
-              />
-            )}
+            {currentTab == "organization" &&
+              orgContext?.getOrganizationId() && (
+                <AccountPageOrganizationData
+                  organizationId={orgContext?.getOrganizationId()}
+                  recruiterId={context.getUserId()}
+                />
+              )}
           </div>
         </div>
       </div>

@@ -1,4 +1,6 @@
+import { useQuery } from "@tanstack/react-query";
 import LeaveOrganisationForm from "../../component/Form/LeaveOrganisationForm.tsx";
+import { getOrganization } from "../../service/OrganizationApiClient.ts";
 
 export default function AccountPageOrganizationData({
   organizationId,
@@ -7,6 +9,28 @@ export default function AccountPageOrganizationData({
   organizationId: string;
   recruiterId: string;
 }) {
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["organization", organizationId],
+    queryFn: () => getOrganization(organizationId),
+  });
+
+  if (isLoading) {
+    return <div>Ładowanie danych organizacji...</div>;
+  }
+
+  if (isError) {
+    return <div className="text-red-500">Błąd: {(error as Error).message}</div>;
+  }
+
+  if (!data) {
+    return <div>Nie znaleziono danych organizacji.</div>;
+  }
+
+  const { name, logo, taxId, address } = data;
+  const formattedAddress = address
+    ? `${address.street} ${address.buildingNo}${address.apartmentNo ? `/${address.apartmentNo}` : ""}, ${address.postalCode} ${address.city}, ${address.country}`
+    : "Brak adresu";
+
   return (
     <>
       <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
@@ -16,43 +40,48 @@ export default function AccountPageOrganizationData({
               Logo
             </dt>
             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/LEGO_logo.svg/512px-LEGO_logo.svg.png?20231016092137"
-                className="w-16 h-16 rounded-lg object-contain"
-                alt="Logo firmy"
-              />
+              {logo ? (
+                <img
+                  src={logo}
+                  className="w-16 h-16 rounded-lg object-contain"
+                  alt={`Logo firmy ${name}`}
+                />
+              ) : (
+                <span className="text-gray-400 italic">Brak logo</span>
+              )}
             </dd>
           </div>
 
           <div className="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Nazwa firmy</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              W gorącej wodzie kompany
+              {name}
             </dd>
           </div>
 
           <div className="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Identyfikator</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              6666
+              {organizationId}
             </dd>
           </div>
 
           <div className="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Adres</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              Wiejska 10
+              {formattedAddress}
             </dd>
           </div>
 
           <div className="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">NIP</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              1234567890
+              {taxId}
             </dd>
           </div>
 
-          <div className="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          {/* Opcjonalne: jeśli API zwróci dane o subskrypcji, można je tu podłączyć w przyszłości */}
+          {/* <div className="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">
               Subskrypcja aktywna
             </dt>
@@ -70,7 +99,7 @@ export default function AccountPageOrganizationData({
             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
               2025-11-11
             </dd>
-          </div>
+          </div> */}
         </dl>
       </div>
 
