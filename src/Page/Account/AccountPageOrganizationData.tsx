@@ -1,28 +1,34 @@
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useContext } from "react";
+import { useEffect } from "react";
 import LeaveOrganisationForm from "../../component/Form/LeaveOrganisationForm.tsx";
 import { getOrganization } from "../../service/OrganizationApiClient.ts";
-import { OrganizationContext } from "../../context/OrganizationContext.tsx";
 
 export default function AccountPageOrganizationData({
   organizationId,
   recruiterId,
+  onNotFound,
 }: {
   organizationId: string;
   recruiterId: string;
+  onNotFound: () => void;
 }) {
-  const orgContext = useContext(OrganizationContext);
-
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["organization", organizationId],
     queryFn: () => getOrganization(organizationId),
+    retry: (failureCount, error) => {
+      if ((error as { status?: number })?.status === 404) {
+        return failureCount < 5;
+      }
+      return failureCount < 3;
+    },
+    retryDelay: 2000, // 2 sekundy przerwy między próbami
   });
 
   useEffect(() => {
     if (isError && (error as { status?: number })?.status === 404) {
-      orgContext?.setOrganizationId(null);
+      onNotFound();
     }
-  }, [isError, error, orgContext]);
+  }, [isError, error, onNotFound]);
 
   if (isLoading) {
     return <div>Ładowanie danych organizacji...</div>;

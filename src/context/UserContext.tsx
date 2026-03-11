@@ -3,6 +3,7 @@
 import {
   createContext,
   useState,
+  useRef,
   useEffect,
   useContext,
   useMemo,
@@ -54,11 +55,20 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
     return token ? decode(token) : null;
   });
 
+  const prevUserRef = useRef<UserInterface | null | undefined>(undefined);
+
   useEffect(() => {
     if (token) {
       const decodedUser = decode(token);
+      // Tylko przy realnym logowaniu (poprzedni stan to null = wylogowany),
+      // nie przy odświeżeniu strony (poprzedni stan to undefined = pierwsze uruchomienie)
+      if (prevUserRef.current === null && decodedUser?.organizationId) {
+        sessionStorage.setItem("organization_id", decodedUser.organizationId);
+      }
+      prevUserRef.current = decodedUser;
       setUser(decodedUser);
     } else {
+      prevUserRef.current = null;
       setUser(null);
     }
   }, [token]);

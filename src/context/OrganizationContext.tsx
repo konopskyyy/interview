@@ -1,15 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 
-import {
-  createContext,
-  useState,
-  useMemo,
-  useCallback,
-  useContext,
-  useEffect,
-} from "react";
+import { createContext, useState, useMemo, useCallback } from "react";
 import type { ReactNode } from "react";
-import { UserContext } from "./UserContext.tsx";
 
 interface OrganizationContextInterface {
   organizationId: string | null;
@@ -28,21 +20,9 @@ export const OrganizationContext =
 export function OrganizationContextProvider({
   children,
 }: OrganizationContextProviderProps) {
-  const userContext = useContext(UserContext);
-  const userOrgId = userContext?.user?.organizationId;
-
-  const [organizationId, setOrganizationIdState] = useState<string | null>(
-    () => {
-      return sessionStorage.getItem("organization_id");
-    },
+  const [organizationId, setOrganizationIdState] = useState<string | null>(() =>
+    sessionStorage.getItem("organization_id"),
   );
-
-  useEffect(() => {
-    if (userOrgId && !sessionStorage.getItem("organizationId")) {
-      sessionStorage.setItem("organization_id", userOrgId);
-      setOrganizationIdState(userOrgId);
-    }
-  }, [userOrgId]);
 
   const getOrganizationId = useCallback((): string | null => {
     return organizationId;
@@ -58,7 +38,7 @@ export function OrganizationContextProvider({
   }, []);
 
   const leaveOrganization = useCallback((): void => {
-    sessionStorage.removeItem("organizationId");
+    sessionStorage.removeItem("organization_id");
     setOrganizationIdState(null);
   }, []);
 
