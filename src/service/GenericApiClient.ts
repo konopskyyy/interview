@@ -10,7 +10,9 @@ export function post(url: string, body: object, errorMessage: string) {
     body: JSON.stringify(body),
   }).then((res) => {
     if (!res.ok) {
-      throw new Error(errorMessage);
+      const error = new Error(errorMessage) as Error & { status: number };
+      error.status = res.status;
+      throw error;
     }
     return res.json();
   });
@@ -27,7 +29,9 @@ export function remove(url: string, errorMessage: string) {
     },
   }).then((res) => {
     if (!res.ok) {
-      throw new Error(errorMessage);
+      const error = new Error(errorMessage) as Error & { status: number };
+      error.status = res.status;
+      throw error;
     }
     return res.text().then((text) => (text ? JSON.parse(text) : {}));
   });
@@ -44,7 +48,9 @@ export function get(url: string, errorMessage: string) {
     },
   }).then((res) => {
     if (!res.ok) {
-      throw new Error(errorMessage);
+      const error = new Error(errorMessage) as Error & { status: number };
+      error.status = res.status;
+      throw error;
     }
     return res.json();
   });

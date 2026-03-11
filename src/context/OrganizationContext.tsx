@@ -13,8 +13,8 @@ import { UserContext } from "./UserContext.tsx";
 
 interface OrganizationContextInterface {
   organizationId: string | null;
-  getOrganizationId: () => string;
-  setOrganizationId: (id: string) => void;
+  getOrganizationId: () => string | null;
+  setOrganizationId: (id: string | null) => void;
   leaveOrganization: () => void;
 }
 
@@ -44,12 +44,16 @@ export function OrganizationContextProvider({
     }
   }, [userOrgId]);
 
-  const getOrganizationId = useCallback((): string => {
-    return organizationId || "";
+  const getOrganizationId = useCallback((): string | null => {
+    return organizationId;
   }, [organizationId]);
 
-  const setOrganizationId = useCallback((id: string): void => {
-    sessionStorage.setItem("organizationId", id);
+  const setOrganizationId = useCallback((id: string | null): void => {
+    if (id) {
+      sessionStorage.setItem("organization_id", id);
+    } else {
+      sessionStorage.removeItem("organization_id");
+    }
     setOrganizationIdState(id);
   }, []);
 

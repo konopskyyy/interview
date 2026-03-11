@@ -75,14 +75,14 @@ export default function AccountPage() {
             )}
 
             {currentTab == "organization" &&
-              !orgContext?.getOrganizationId() && (
+              orgContext?.getOrganizationId() == null && (
                 <AccountPageAddOrganization />
               )}
 
             {currentTab == "organization" &&
-              orgContext?.getOrganizationId() && (
+              orgContext?.getOrganizationId() != null && (
                 <AccountPageOrganizationData
-                  organizationId={orgContext?.getOrganizationId()}
+                  organizationId={orgContext?.getOrganizationId() as string}
                   recruiterId={context.getUserId()}
                 />
               )}
