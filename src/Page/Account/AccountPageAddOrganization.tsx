@@ -5,8 +5,11 @@ import SendFormButton from "../../component/UI/Form/SendFormButton.tsx";
 import { createOrganization } from "../../service/OrganizationApiClient.ts";
 import { useMutation } from "@tanstack/react-query";
 import type { organizationBody } from "../../service/OrganizationApiClient.ts";
+import { useContext } from "react";
+import { OrganizationContext } from "../../context/OrganizationContext.tsx";
 
 export default function AccountPageAddOrganization() {
+  const orgContext = useContext(OrganizationContext);
   const [newOrganizationCode, setNewOrganizationCode] = useState<string>("");
   const [newOrganizationName, setNewOrganizationName] = useState<string>("");
   const [logo, setLogo] = useState<string>("");
@@ -50,8 +53,10 @@ export default function AccountPageAddOrganization() {
         candidates: [],
       },
       {
-        onSuccess() {
-          alert("sukces");
+        onSuccess(data) {
+          if (data && data.uuid) {
+            orgContext?.setOrganizationId(data.uuid);
+          }
         },
         onError(error) {
           alert((error as Error).message);

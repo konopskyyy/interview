@@ -14,6 +14,12 @@ export default function AccountPage() {
   const authContext = useContext(AuthContext);
   const orgContext = useContext(OrganizationContext);
   const [currentTab, setCurrentTab] = useState<string>("profile");
+  const [orgNotFound, setOrgNotFound] = useState<boolean>(false);
+  const orgId = orgContext?.getOrganizationId();
+
+  useEffect(() => {
+    setOrgNotFound(false);
+  }, [orgId]);
 
   const activeTab =
     "border-b-2 border-blue-600 px-4 py-2 text-sm font-medium text-blue-600 transition-colors hover:text-blue-700";
@@ -74,18 +80,17 @@ export default function AccountPage() {
               </div>
             )}
 
-            {currentTab == "organization" &&
-              !orgContext?.getOrganizationId() && (
-                <AccountPageAddOrganization />
-              )}
+            {currentTab == "organization" && (orgNotFound || orgId == null) && (
+              <AccountPageAddOrganization />
+            )}
 
-            {currentTab == "organization" &&
-              orgContext?.getOrganizationId() && (
-                <AccountPageOrganizationData
-                  organizationId={orgContext?.getOrganizationId()}
-                  recruiterId={context.getUserId()}
-                />
-              )}
+            {currentTab == "organization" && !orgNotFound && orgId != null && (
+              <AccountPageOrganizationData
+                organizationId={orgId}
+                recruiterId={context.getUserId()}
+                onNotFound={() => setOrgNotFound(true)}
+              />
+            )}
           </div>
         </div>
       </div>
