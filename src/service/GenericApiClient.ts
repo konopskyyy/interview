@@ -1,3 +1,10 @@
+function handleUnauthorized() {
+  sessionStorage.removeItem("user_token");
+  sessionStorage.removeItem("organization_id");
+  sessionStorage.setItem("session_expired", "true");
+  window.dispatchEvent(new Event("auth:expired"));
+}
+
 export function post(url: string, body: object, errorMessage: string) {
   return fetch(url, {
     method: "POST",
@@ -10,6 +17,9 @@ export function post(url: string, body: object, errorMessage: string) {
     body: JSON.stringify(body),
   }).then((res) => {
     if (!res.ok) {
+      if (res.status === 401) {
+        handleUnauthorized();
+      }
       const error = new Error(errorMessage) as Error & { status: number };
       error.status = res.status;
       throw error;
@@ -29,6 +39,9 @@ export function remove(url: string, errorMessage: string) {
     },
   }).then((res) => {
     if (!res.ok) {
+      if (res.status === 401) {
+        handleUnauthorized();
+      }
       const error = new Error(errorMessage) as Error & { status: number };
       error.status = res.status;
       throw error;
@@ -48,10 +61,16 @@ export function get(url: string, errorMessage: string) {
     },
   }).then((res) => {
     if (!res.ok) {
+      if (res.status === 401) {
+        handleUnauthorized();
+        return null;
+      }
+
       const error = new Error(errorMessage) as Error & { status: number };
       error.status = res.status;
       throw error;
     }
+
     return res.json();
   });
 }

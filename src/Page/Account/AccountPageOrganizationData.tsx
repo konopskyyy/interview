@@ -15,34 +15,26 @@ export default function AccountPageOrganizationData({
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["organization", organizationId],
     queryFn: () => getOrganization(organizationId),
-    retry: (failureCount, error) => {
-      if ((error as { status?: number })?.status === 404) {
-        return failureCount < 5;
-      }
-      return failureCount < 3;
-    },
+    retry: 3,
     retryDelay: 2000, // 2 sekundy przerwy między próbami
   });
 
   useEffect(() => {
-    if (isError && (error as { status?: number })?.status === 404) {
+    if (!isLoading && !isError && data === null) {
       onNotFound();
     }
-  }, [isError, error, onNotFound]);
+  }, [data, isError, isLoading, onNotFound]);
 
   if (isLoading) {
     return <div>Ładowanie danych organizacji...</div>;
   }
 
   if (isError) {
-    if ((error as { status?: number })?.status === 404) {
-      return null;
-    }
     return <div className="text-red-500">Błąd: {(error as Error).message}</div>;
   }
 
-  if (!data) {
-    return <div>Nie znaleziono danych organizacji.</div>;
+  if (data === null) {
+    return null;
   }
 
   const { name, logo, taxId, address } = data;

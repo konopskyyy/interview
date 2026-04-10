@@ -1,6 +1,12 @@
 /* eslint-disable react-refresh/only-export-components */
 
-import { createContext, useState, useMemo, useCallback } from "react";
+import {
+  createContext,
+  useState,
+  useMemo,
+  useCallback,
+  useEffect,
+} from "react";
 import type { ReactNode } from "react";
 import { useNavigate } from "react-router";
 import { logout as apiLogout } from "../service/UserApiClient.ts";
@@ -40,6 +46,19 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     sessionStorage.removeItem("organization_id");
     setToken(null);
     navigate("/");
+  }, [navigate]);
+
+  useEffect(() => {
+    function handleAuthExpired() {
+      setToken(null);
+      navigate("/login");
+    }
+
+    window.addEventListener("auth:expired", handleAuthExpired);
+
+    return () => {
+      window.removeEventListener("auth:expired", handleAuthExpired);
+    };
   }, [navigate]);
 
   const contextValue = useMemo(

@@ -1,6 +1,7 @@
 import { post, remove, get } from "./GenericApiClient.ts";
 
 const BASE_URL = "https://questions.tojest.dev/api/";
+
 export type organizationBody = {
   name: string;
   logo: string;
@@ -30,4 +31,8 @@ export function leaveOrganization(organizationId: string, recruiterId: string) {
     BASE_URL + "organization/" + organizationId + "/recruiter/" + recruiterId,
     "Błąd odejścia",
   );
+}
+
+export function getOrganizationsList() {
+  return get(`${BASE_URL}organization`, "Błąd pobierania listy organizacji");
 }

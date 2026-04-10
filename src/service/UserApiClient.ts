@@ -1,4 +1,4 @@
-import { post, remove } from "./GenericApiClient.ts";
+import { get, post, remove } from "./GenericApiClient.ts";
 
 const BASE_URL = "https://questions.tojest.dev/api/";
 
@@ -23,4 +23,11 @@ export function logout(data: object) {
 
 export function removeUser() {
   return remove(BASE_URL + "user", "Błąd usuwania użytkownika");
+}
+
+export function getOrganizationIdByUserId(userId: string) {
+  return get(
+    BASE_URL + `user/${userId}/organization`,
+    "Błąd pobierania ID organizacji",
+  );
 }
