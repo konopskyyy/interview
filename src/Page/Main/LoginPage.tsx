@@ -1,6 +1,16 @@
+import { useEffect, useState } from "react";
 import LoginForm from "../../component/Form/LoginForm";
 
 export default function LoginPage() {
+  const [sessionExpired, setSessionExpired] = useState(false);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("session_expired") === "true") {
+      setSessionExpired(true);
+      sessionStorage.removeItem("session_expired");
+    }
+  }, []);
+
   return (
     <div className="flex min-h-screen w-screen relative left-[calc(-50vw+50%)] font-sans">
       <div className="hidden lg:block w-1/2 bg-gray-900 relative overflow-hidden">
@@ -31,6 +41,12 @@ export default function LoginPage() {
             </h2>
             <p className="text-gray-500 text-lg">Witamy z powrotem</p>
           </div>
+
+          {sessionExpired && (
+            <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+              Sesja wygasła. Zaloguj się ponownie.
+            </div>
+          )}
 
           <LoginForm />
 

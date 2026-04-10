@@ -7,6 +7,8 @@ import AccountPageOrganizationData from "./AccountPageOrganizationData.tsx";
 import AccountPageAddOrganization from "./AccountPageAddOrganization.tsx";
 import RemoveAccountForm from "../../component/Form/RemoveAccountForm.tsx";
 import ChangePasswordForm from "../../component/Form/ChangePasswordForm.tsx";
+import AccountInvitationOrganization from "./AccountInvitationOrganization.tsx";
+import OrganizationList from "../Organization/OrganizationList.tsx";
 
 export default function AccountPage() {
   const navigate = useNavigate();
@@ -80,16 +82,31 @@ export default function AccountPage() {
               </div>
             )}
 
+            {currentTab == "organization" && orgId == null && (
+              <OrganizationList />
+            )}
+
+            {currentTab == "organization" && <AccountInvitationOrganization />}
+
             {currentTab == "organization" && (orgNotFound || orgId == null) && (
               <AccountPageAddOrganization />
             )}
 
             {currentTab == "organization" && !orgNotFound && orgId != null && (
-              <AccountPageOrganizationData
-                organizationId={orgId}
-                recruiterId={context.getUserId()}
-                onNotFound={() => setOrgNotFound(true)}
-              />
+              <div className="space-y-4">
+                <button
+                  type="button"
+                  onClick={() => orgContext?.setOrganizationId(null)}
+                  className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
+                >
+                  Wroc do listy organizacji
+                </button>
+                <AccountPageOrganizationData
+                  organizationId={orgId}
+                  recruiterId={context.getUserId()}
+                  onNotFound={() => setOrgNotFound(true)}
+                />
+              </div>
             )}
           </div>
         </div>
