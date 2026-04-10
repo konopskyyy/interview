@@ -1,7 +1,6 @@
 import { get, post, remove } from "./GenericApiClient.ts";
 
-// const BASE_URL = "https://questions.tojest.dev/api/";
-const BASE_URL = "http://localhost:2001/api/";
+const BASE_URL = "https://questions.tojest.dev/api/";
 
 export function userLogin(user: { username: string; password: string }) {
   return post(BASE_URL + "login_check", user, "Błąd logowania");

@@ -1,7 +1,6 @@
 import { post, remove, get } from "./GenericApiClient.ts";
 
-// const BASE_URL = "https://questions.tojest.dev/api/";
-const BASE_URL = "http://localhost:2001/api/";
+const BASE_URL = "https://questions.tojest.dev/api/";
 
 export type organizationBody = {
   name: string;
