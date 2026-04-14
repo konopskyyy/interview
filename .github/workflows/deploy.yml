@@ -10,9 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install sshpass
-        run: sudo apt-get update && sudo apt-get install -y sshpass
-
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
@@ -30,13 +27,18 @@ jobs:
       - name: List files after build (debug)
         run: ls -l ./dist
 
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: unnecessary
+          if_key_exists: fail
+
       - name: Rsync built files to server (excluding .env)
         run: |
           set -e
-          if ssh -p ${{ secrets.SSH_PORT }} -o BatchMode=yes -o ConnectTimeout=5 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'echo ok' 2>/dev/null; then
-            echo "Połączenie przez klucz SSH działa."
-            rsync -avz --delete --exclude '.env' -e "ssh -p ${{ secrets.SSH_PORT }}" ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_FRONTEND_PATH }}
-          else
-            echo "Klucz SSH nie działa, próbuję przez hasło."
-            sshpass -p "${{ secrets.SSH_PASSWORD }}" rsync -avz --delete --exclude '.env' -e "ssh -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }}" ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_FRONTEND_PATH }}
-          fi
+          # Dodanie hosta do known_hosts, aby uniknąć pytań o autentyczność
+          ssh-keyscan -p ${{ secrets.SSH_PORT }} -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+          echo "Próba połączenia przez klucz SSH..."
+          rsync -avz --delete --exclude '.env' -e "ssh -p ${{ secrets.SSH_PORT }}" ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_FRONTEND_PATH }}
